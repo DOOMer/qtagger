@@ -112,14 +112,14 @@ void MainWindow::slotAboutQt()
 void MainWindow::slotAddFiles()
 {
 //    tag = new Tag;
-    QStringList fileList = QFileDialog::getOpenFileNames(this, tr("Open File"),"/home/doomer/music");
+    QStringList fileList = QFileDialog::getOpenFileNames(this, tr("Open File"), QDir::homePath());
 
     app->addFiles(fileList);
 }
 
 void MainWindow::slotAddDir()
 {
-    QDir addingDir = QFileDialog::getExistingDirectory(this, tr("Add directory"), "/home/doomer/music/", QFileDialog::ShowDirsOnly);
+    QDir addingDir = QFileDialog::getExistingDirectory(this, tr("Add directory"), QDir::homePath(), QFileDialog::ShowDirsOnly);
     app->addDir(addingDir);
 }
 
