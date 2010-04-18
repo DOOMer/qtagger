@@ -43,6 +43,7 @@ public:
     void addFiles(QStringList &files);
     void addDir(QDir &selectDir);
     void removeFiles(QModelIndexList &indexez);
+    bool updateItem(QModelIndex &index);
     void clearList();
     bool toUnicode();
     void setTag(Tag *tag);

@@ -42,6 +42,7 @@ public:
     Qt::ItemFlags flags(const QModelIndex &index) const;
 
     bool insertRow(int row, TrackFileItem *track);
+    bool updateRow(QModelIndex &index);
     bool removeRow(int row);    
     bool removeRows(QModelIndexList &rowsList);
     bool clear();

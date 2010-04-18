@@ -176,18 +176,17 @@ void MainWindow::on_treeView_clicked(QModelIndex index)
     ui->editaArtist->setText(app->currentTag()->artist());
     ui->editYear->setText(QString::number(app->currentTag()->year()));
     ui->cbxGenre->setEditText(app->currentTag()->genre());;
+
     // TODO -- create genrelist & select in list
     ui->editTrackNum->setText(QString::number(app->currentTag()->trackNum()));
     ui->editComment->setPlainText(app->currentTag()->comment());
 
+    ui->labBitrate->setText("Bitrate:" + QString::number(app->currentTag()->audio->bitrate()));
+    ui->labSampleRate->setText("Sample rate:" + QString::number(app->currentTag()->audio->sampleRate()));
+        ui->labTime->setText("Time:" + app->currentTag()->audio->timeStr());
+//        QString str = app->currentTag()->title();
 
-ui->labBitrate->setText("Bitrate:" + QString::number(app->currentTag()->audio->bitrate()));
-ui->labSampleRate->setText("Sample rate:" + QString::number(app->currentTag()->audio->sampleRate()));
-    ui->labTime->setText("Time:" + app->currentTag()->audio->timeStr());
-    QString str = app->currentTag()->title();
-
-    qDebug() << "to local 8 bit " << str;
-
+//        qDebug() << "to local 8 bit " << str;
 }
 
 void MainWindow::on_butCancel_clicked()
@@ -215,6 +214,25 @@ void MainWindow::on_butSave_clicked()
     if (app->currentTag()->writeInfo() == true)
     {
         qDebug() << "true saving";
+        QModelIndex selected = ui->treeView->currentIndex();
+        if (app->updateItem(selected) == true)
+        {
+            // clear edit boxes
+            ui->editaArtist->clear();
+            ui->editAlbum->clear();
+            ui->editComment->clear();
+            ui->editTitle->clear();
+            ui->editTrackNum->clear();
+            ui->editYear->clear();
+
+            // clear audio info labels
+            ui->labSampleRate->clear();
+            ui->labBitrate->clear();
+            ui->labTime->clear();
+
+            // clear selection item
+            ui->treeView->clearSelection();
+        }
     }
     else
     {

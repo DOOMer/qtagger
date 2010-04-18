@@ -132,6 +132,21 @@ bool TrackModel::insertRow(int row, TrackFileItem *track)
     return true;
 }
 
+bool TrackModel::updateRow(QModelIndex &index)
+{
+    int row = index.row();
+    if (row == -1)
+    {
+        return false;
+    }
+    else
+    {
+        Tag* ad;
+        dataChanged(index, index);
+        return true;
+    }
+}
+
 bool TrackModel::removeRow(int row)
 {
     if (row != -1)

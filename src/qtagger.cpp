@@ -80,6 +80,16 @@ void QTagger::removeFiles(QModelIndexList &indexez)
     qDebug() << __PRETTY_FUNCTION__ << "debug qlist" << tracks.size();
 }
 
+bool QTagger::updateItem(QModelIndex &index)
+{
+    TrackFileItem *selectTrack = model->getItem(index.row());
+    selectTrack->setData(TRACK_INFO_TITLE, current->title());
+    selectTrack->setData(TRACK_INFO_ALBUM, current->album());
+    selectTrack->setData(TRACK_INFO_ARTIST, current->artist());
+    qDebug() << "selected is " << index.row();
+    return model->updateRow(index);
+}
+
 void QTagger::clearList()
 {
     model->clear();
