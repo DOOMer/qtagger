@@ -42,7 +42,6 @@ void QTagger::createTrackItem(const QString &file)
 {
     TrackFileItem *track = new TrackFileItem(file, current);
     model->insertRow(model->rowCount(), track);
-    qDebug() << "tracks.size() " << tracks.size();
 }
 
 void QTagger::addFiles(QStringList &files)
@@ -77,7 +76,6 @@ void QTagger::addDir(QDir &selectDir)
 void QTagger::removeFiles(QModelIndexList &indexez)
 {
     model->removeRows(indexez);
-    qDebug() << __PRETTY_FUNCTION__ << "debug qlist" << tracks.size();
 }
 
 bool QTagger::updateItem(QModelIndex &index)
@@ -86,32 +84,22 @@ bool QTagger::updateItem(QModelIndex &index)
     selectTrack->setData(TRACK_INFO_TITLE, current->title());
     selectTrack->setData(TRACK_INFO_ALBUM, current->album());
     selectTrack->setData(TRACK_INFO_ARTIST, current->artist());
-    qDebug() << "selected is " << index.row();
+
     return model->updateRow(index);
 }
 
 void QTagger::clearList()
 {
-    model->clear();
-    qDebug() << "debug qlist" << tracks;
+    model->clear();    
 }
 
 bool QTagger::toUnicode()
 {    
-//    QTextCodec *pCodec = QTextCodec::codecForName("Windows-1251");
-//    QByteArray arr;
-//    arr.append(currentTag()->title());
-//    currentTag()->setTitle(pCodec->toUnicode(arr));
-//    qDebug() << "currentTag()->title()   " << currentTag()->title();
-
-    // TODO -- зафигачить байт-масси в отдельную функцию, передавать ей строку и выкидывать юникодный кустринг, отдаваемый  таг-классу
-
     return true;
 }
 
 void QTagger::setTag(Tag *tag)
 {
-    qDebug() << "setting tag " << tag;
     current = tag;
 }
 

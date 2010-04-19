@@ -28,7 +28,6 @@
 #include <QAction>
 #include <QMenu>
 #include <QItemSelection>
-#include <QDebug>
 
 #include "qtagger.h"
 #include "tag.h"

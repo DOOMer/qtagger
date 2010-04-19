@@ -90,8 +90,6 @@ TagLib::String Tag::toTagLibStr(QString str)
 // readi tag info from file
 void Tag::readInfo()
 {
-    qDebug() << "file == " << filename;
-
     TagLib::FileRef ref(filename.toLocal8Bit());
 
     // if fileref is not null
@@ -101,32 +99,22 @@ void Tag::readInfo()
 
         setTitle(QString::fromUtf8(fileTag->title().toCString(true)));
         setArtist(QString::fromUtf8(fileTag->artist().toCString(true)));
-//        setArtist(TStringToQString(fileTag->artist()));
         setAlbum(QString::fromUtf8(fileTag->album().toCString(true)));
         setYear(fileTag->year());
         setGenre(QString::fromUtf8(fileTag->genre().toCString(true)) );
-
         setTrackNum(fileTag->track());
-//        setDiskNum(fileTag->d);
         setComment(QString::fromUtf8(fileTag->comment().toCString(true)));
 
     }
-    qDebug() << "audio ptr === " << audio;
-//    if (audio)
-//    {
-//        qDebug() << "------------ valid" ;
-//    }
-    audio->readAuidioInfo();
 
+    // get audio properties
+    audio->readAuidioInfo();
 }
 
 
 // write tag info to file
 bool Tag::writeInfo()
 {
-    qDebug() << "file == " << filename;
-    qDebug() << "file == " << filename;
-
     TagLib::FileRef ref(filename.toLocal8Bit());
 
     if (ref.isNull() == false && ref.tag())
@@ -145,7 +133,6 @@ bool Tag::writeInfo()
     }
     else
     {
-        qDebug() << "not tagged";
         return false;
     }
 }

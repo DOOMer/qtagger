@@ -68,8 +68,6 @@ QVariant TrackModel::headerData(int section, Qt::Orientation orientation, int ro
 
 QVariant TrackModel::data(const QModelIndex &index, int role) const
 {
-//    qDebug() << "index " << index.isValid();
-
     if (!index.isValid())
     {
         return QVariant();
@@ -155,7 +153,6 @@ bool TrackModel::removeRow(int row)
         TrackFileItem *track = tracks->takeAt(row);
         delete track;
 
-        qDebug() << "rows after removed " << tracks->count();
         endRemoveRows();
         return true;
     }

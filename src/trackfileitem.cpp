@@ -60,9 +60,6 @@ QVariant TrackFileItem::data(int colum) const
 
     QList<QString> keys = trackData.keys();
 
-//        qDebug() << "keys___ ---" << trackData.keys() ;
-//        qDebug() << "values__ ---" << trackData.values();
-
     return trackData.value(keys.value(colum));
 }
 

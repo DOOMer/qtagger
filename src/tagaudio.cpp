@@ -25,8 +25,6 @@ TagAudio::TagAudio()
     if (data)
     {
         Init();
-////        readAuidioInfo();
-//        qDebug() << "bitrate " << data->bitrate;
     }
 }
 
@@ -38,8 +36,6 @@ TagAudio::TagAudio(QString &file)
     if (data)
     {
         Init();
-//        readAuidioInfo();
-//        qDebug() << "bitrate " << data->bitrate;
     }
 }
 
@@ -62,7 +58,6 @@ void TagAudio::setFile(QString &file)
 
 void TagAudio::readAuidioInfo()
 {
-    qDebug() << "entering read audio info ...." << filename.toLocal8Bit();
     TagLib::FileRef ref(filename.toLocal8Bit());
 
     if (ref.isNull() == false && ref.audioProperties())
@@ -72,7 +67,6 @@ void TagAudio::readAuidioInfo()
         data->rate = properties->sampleRate();
         data->bitrate = properties->bitrate();
     }
-    qDebug() << "exiting read audio info ....";
 }
 
 uint TagAudio::bitrate() const

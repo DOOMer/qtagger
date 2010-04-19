@@ -114,8 +114,7 @@ void MainWindow::slotExit()
 }
 
 void MainWindow::slotAbout()
-{
-    qDebug() << "about slot";
+{    
     AboutDialog * about = new AboutDialog;
 
     about->exec();
@@ -149,7 +148,6 @@ void MainWindow::slotAddDir()
 
 void MainWindow::slotToUnicode()
 {
-    qDebug() << "slot to unicode  ";
     app->toUnicode();
 }
 
@@ -223,7 +221,6 @@ void MainWindow::on_butSave_clicked()
 
     if (app->currentTag()->writeInfo() == true)
     {
-        qDebug() << "true saving";
         QModelIndex selected = ui->treeView->currentIndex();
         if (app->updateItem(selected) == true)
         {

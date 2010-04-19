@@ -24,7 +24,6 @@
 #include <QList>
 #include <QStringList>
 #include <QDir>
-//#include <QTextCodec>
 #include <QDebug>
 
 #include "tag.h"
