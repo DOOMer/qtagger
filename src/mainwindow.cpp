@@ -179,15 +179,15 @@ void MainWindow::slotSettings()
 void MainWindow::on_treeView_clicked(QModelIndex index)
 {        
     app->currentTag()->setFile(app->getTrackModel()->getItem(index.row())->getFile());
-    ui->editTitle->setText(app->currentTag()->title());
-    ui->editAlbum->setText(app->currentTag()->album());
-    ui->editaArtist->setText(app->currentTag()->artist());
+    ui->editTitle->setText(app->currentTag()->toUtfTagStr(app->currentTag()->title()));
+    ui->editAlbum->setText(app->currentTag()->toUtfTagStr(app->currentTag()->album()));
+    ui->editaArtist->setText(app->currentTag()->toUtfTagStr(app->currentTag()->artist()));
     ui->editYear->setText(QString::number(app->currentTag()->year()));
-    ui->cbxGenre->setEditText(app->currentTag()->genre());;
+    ui->cbxGenre->setEditText(app->currentTag()->toUtfTagStr(app->currentTag()->genre()));
 
     // TODO -- create genrelist & select in list
     ui->editTrackNum->setText(QString::number(app->currentTag()->trackNum()));
-    ui->editComment->setPlainText(app->currentTag()->comment());
+    ui->editComment->setPlainText(app->currentTag()->toUtfTagStr(app->currentTag()->comment()));
 
     ui->labBitrate->setText("Bitrate:" + QString::number(app->currentTag()->audio->bitrate()));
     ui->labSampleRate->setText("Sample rate:" + QString::number(app->currentTag()->audio->sampleRate()));

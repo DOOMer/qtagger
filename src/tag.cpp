@@ -87,6 +87,23 @@ TagLib::String Tag::toTagLibStr(QString str)
     }
 }
 
+QString& Tag::toUtfTagStr(QString& str)
+{
+    TagLib::String taglibStr(str.toUtf8().data(), TagLib::String::UTF8);
+    if (taglibStr.isLatin1() == true)
+    {
+        QTextCodec *codec = QTextCodec::codecForName("Windows-1251");
+        QByteArray arr;
+        arr.append(str);
+        str = codec->toUnicode(arr);
+        return str;
+    }
+    else
+    {
+        return str;
+    }
+}
+
 // readi tag info from file
 void Tag::readInfo()
 {
@@ -144,7 +161,7 @@ void Tag::setTitle(const QString &title)
     data->title = title;
 }
 
-QString Tag::title() const
+QString& Tag::title() const
 {
     return data->title;
 }
@@ -154,7 +171,7 @@ void Tag::setArtist(const QString &artist)
     data->artist = artist;
 }
 
-QString Tag::artist() const
+QString& Tag::artist() const
 {
     return data->artist;
 }
@@ -165,7 +182,7 @@ void Tag::setAlbum(const QString &album)
     data->album = album;
 }
 
-QString Tag::album() const
+QString& Tag::album() const
 {
     return data->album;
 }
@@ -201,7 +218,7 @@ void Tag::setGenre(const QString &genre)
     data->genre = genre;
 }
 
-QString Tag::genre() const
+QString& Tag::genre() const
 {
     return data->genre;
 }
@@ -213,7 +230,7 @@ void Tag::setComment(const QString &comment)
     data->comment = comment;
 }
 
-QString Tag::comment() const
+QString& Tag::comment() const
 {
     return data->comment;
 }

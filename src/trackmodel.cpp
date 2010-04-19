@@ -42,7 +42,6 @@ QVariant TrackModel::headerData(int section, Qt::Orientation orientation, int ro
         return QVariant();
     }
 
-    // FIXME -- makenormal headers
     QString str;
 
     if (orientation != Qt::Vertical)
@@ -90,7 +89,6 @@ QVariant TrackModel::data(const QModelIndex &index, int role) const
             break;
         }
 
-
         return QVariant(tracks->at(index.row())->data(index.column())); //->getFile());
         break;
     case Qt::ToolTipRole:
@@ -103,7 +101,7 @@ QVariant TrackModel::data(const QModelIndex &index, int role) const
 
 
 bool TrackModel::setData(const QModelIndex &index, const QVariant &value, int role)
-{    
+{
     return true;
 }
 
@@ -131,15 +129,15 @@ bool TrackModel::insertRow(int row, TrackFileItem *track)
 }
 
 bool TrackModel::updateRow(QModelIndex &index)
-{
+{    
     int row = index.row();
     if (row == -1)
     {
+        qDebug() << "row is " << row;
         return false;
     }
     else
     {
-        Tag* ad;
         dataChanged(index, index);
         return true;
     }

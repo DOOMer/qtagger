@@ -60,22 +60,23 @@ public:
     void setComment(const QString &comment);
     void setFile(const QString &file);
 
+    QString& toUtfTagStr(QString& str);
     TagLib::String toTagLibStr(QString str);
 
-    QString title() const ;
-    QString artist() const;
-    QString album() const;
+    QString& title() const;
+    QString& artist() const;
+    QString& album() const;
     quint16 year() const;
     quint8 trackNum() const;    
-    QString genre() const;
-    QString comment() const;    
+    QString& genre() const;
+    QString& comment() const;
     QString file() const;    
 
 private:
     TagData *data;
     QString filename;
 
-    void Init();    
+    void Init();
 };
 
 #endif // TAG_H

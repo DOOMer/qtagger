@@ -81,6 +81,7 @@ void QTagger::removeFiles(QModelIndexList &indexez)
 bool QTagger::updateItem(QModelIndex &index)
 {
     TrackFileItem *selectTrack = model->getItem(index.row());
+
     selectTrack->setData(TRACK_INFO_TITLE, current->title());
     selectTrack->setData(TRACK_INFO_ALBUM, current->album());
     selectTrack->setData(TRACK_INFO_ARTIST, current->artist());
@@ -94,7 +95,7 @@ void QTagger::clearList()
 }
 
 bool QTagger::toUnicode()
-{    
+{
     return true;
 }
 
