@@ -27,6 +27,7 @@
 #include <QFileDialog>
 #include <QAction>
 #include <QMenu>
+#include <QItemSelection>
 #include <QDebug>
 
 #include "qtagger.h"
@@ -70,6 +71,7 @@ private:
     Tag *tag;
 
     void createActions();
+    void clearEditBoxes();
 
 private slots:
     void on_butSave_clicked();
@@ -84,6 +86,7 @@ private slots:
     void slotRemoveFiles();
     void slotClear();
     void slotSettings();
+    void slotTreeSelChanged(const QItemSelection &selected, const QItemSelection &deselected);
 };
 
 #endif // MAINWINDOW_H

@@ -93,7 +93,7 @@ void MainWindow::createActions()
     connect(actRemove, SIGNAL(triggered()), this, SLOT(slotRemoveFiles()));
     connect(actClear, SIGNAL(triggered()), this, SLOT(slotClear()));
     connect(actSettings, SIGNAL(triggered()), this, SLOT(slotSettings()));
-    connect(actToUnicode, SIGNAL(triggered()), this, SLOT(slotToUnicode()));
+    connect(actToUnicode, SIGNAL(triggered()), this, SLOT(slotToUnicode()));    
 }
 
 void MainWindow::changeEvent(QEvent *e)
@@ -134,12 +134,16 @@ void MainWindow::slotAddFiles()
     QStringList fileList = QFileDialog::getOpenFileNames(this, tr("Open File"), QDir::homePath());
 
     app->addFiles(fileList);
+
+    connect(ui->treeView->selectionModel(), SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)), this, SLOT(slotTreeSelChanged(const QItemSelection &, const QItemSelection &)));
 }
 
 void MainWindow::slotAddDir()
 {
     QDir addingDir = QFileDialog::getExistingDirectory(this, tr("Add directory"), QDir::homePath(), QFileDialog::ShowDirsOnly);
     app->addDir(addingDir);
+
+    connect(ui->treeView->selectionModel(), SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)), this, SLOT(slotTreeSelChanged(const QItemSelection &, const QItemSelection &)));
 }
 
 
@@ -155,11 +159,17 @@ void MainWindow::slotRemoveFiles()
     app->removeFiles(indexez);
 
     ui->treeView->clearSelection();
+
+    if (app->getTrackModel()->rowCount() == 0)
+    {
+        disconnect(ui->treeView->selectionModel(), SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)), this, SLOT(slotTreeSelChanged(const QItemSelection &, const QItemSelection &)));
+    }
 }
 
 void MainWindow::slotClear()
 {
     app->clearList();
+    disconnect(ui->treeView->selectionModel(), SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)), this, SLOT(slotTreeSelChanged(const QItemSelection &, const QItemSelection &)));
 }
 
 void MainWindow::slotSettings()
@@ -169,7 +179,7 @@ void MainWindow::slotSettings()
 
 
 void MainWindow::on_treeView_clicked(QModelIndex index)
-{
+{        
     app->currentTag()->setFile(app->getTrackModel()->getItem(index.row())->getFile());
     ui->editTitle->setText(app->currentTag()->title());
     ui->editAlbum->setText(app->currentTag()->album());
@@ -217,20 +227,8 @@ void MainWindow::on_butSave_clicked()
         QModelIndex selected = ui->treeView->currentIndex();
         if (app->updateItem(selected) == true)
         {
-            // clear edit boxes
-            ui->editaArtist->clear();
-            ui->editAlbum->clear();
-            ui->editComment->clear();
-            ui->editTitle->clear();
-            ui->editTrackNum->clear();
-            ui->editYear->clear();
-
-            // clear audio info labels
-            ui->labSampleRate->clear();
-            ui->labBitrate->clear();
-            ui->labTime->clear();
-
-            // clear selection item
+            // clear selection
+            clearEditBoxes();
             ui->treeView->clearSelection();
         }
     }
@@ -243,4 +241,26 @@ void MainWindow::on_butSave_clicked()
 //    QString str = app->currentTag()->title().toLatin1();
 //    qDebug() << str;
 
+}
+
+void MainWindow::slotTreeSelChanged(const QItemSelection &selected, const QItemSelection &deselected)
+{
+    if (selected.isEmpty() == true)
+    {
+        clearEditBoxes();
+    }
+}
+
+void MainWindow::clearEditBoxes()
+{
+    ui->editaArtist->clear();
+    ui->editAlbum->clear();
+    ui->editComment->clear();
+    ui->editTitle->clear();
+    ui->editTrackNum->clear();
+    ui->editYear->clear();
+
+    ui->labBitrate->clear();
+    ui->labSampleRate->clear();
+    ui->labTime->clear();
 }
