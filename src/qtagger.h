@@ -44,7 +44,7 @@ public:
     void removeFiles(QModelIndexList &indexez);
     bool updateItem(QModelIndex &index);
     void clearList();
-    bool toUnicode();
+    bool toUnicode(QModelIndexList &indexez);
     void setTag(Tag *tag);
     Tag* currentTag();
 signals:

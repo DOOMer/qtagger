@@ -60,6 +60,8 @@ public:
     void setComment(const QString &comment);
     void setFile(const QString &file);
 
+    // convert data in tag for update track item info
+    void toUtfTag();
     QString& toUtfTagStr(QString& str);
     TagLib::String toTagLibStr(QString str);
 

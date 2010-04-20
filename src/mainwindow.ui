@@ -29,6 +29,9 @@
     <property name="selectionBehavior">
      <enum>QAbstractItemView::SelectRows</enum>
     </property>
+    <property name="rootIsDecorated">
+     <bool>false</bool>
+    </property>
    </widget>
    <widget class="QLabel" name="labTitle">
     <property name="geometry">

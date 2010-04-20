@@ -87,6 +87,18 @@ TagLib::String Tag::toTagLibStr(QString str)
     }
 }
 
+void Tag::toUtfTag()
+{
+    // convert data in tag
+    data->title = toUtfTagStr(data->title);
+    data->artist = toUtfTagStr(data->artist);
+    data->album = toUtfTagStr(data->album);
+    data->comment = toUtfTagStr(data->comment);
+    data->genre = toUtfTagStr(data->genre);
+
+    writeInfo();
+}
+
 QString& Tag::toUtfTagStr(QString& str)
 {
     TagLib::String taglibStr(str.toUtf8().data(), TagLib::String::UTF8);

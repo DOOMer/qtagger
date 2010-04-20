@@ -25,6 +25,9 @@
 #include <QModelIndex>
 #include <QModelIndexList>
 #include <QList>
+#include <QColor>
+#include <QApplication>
+#include <QPalette>
 
 #include "trackfileitem.h"
 
@@ -42,7 +45,7 @@ public:
     Qt::ItemFlags flags(const QModelIndex &index) const;
 
     bool insertRow(int row, TrackFileItem *track);
-    bool updateRow(QModelIndex &index);
+    bool updateRow(const QModelIndex &index);
     bool removeRow(int row);    
     bool removeRows(QModelIndexList &rowsList);
     bool clear();

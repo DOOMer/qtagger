@@ -148,13 +148,17 @@ void MainWindow::slotAddDir()
 
 void MainWindow::slotToUnicode()
 {
-    app->toUnicode();
+    QModelIndexList selected = ui->treeView->selectionModel()->selectedRows();
+    if (app->toUnicode(selected) == true)
+    {
+        ui->treeView->clearSelection();
+    }
 }
 
 void MainWindow::slotRemoveFiles()
 {
-    QModelIndexList indexez = ui->treeView->selectionModel()->selectedRows();
-    app->removeFiles(indexez);
+    QModelIndexList selected = ui->treeView->selectionModel()->selectedRows();
+    app->removeFiles(selected);
 
     ui->treeView->clearSelection();
 

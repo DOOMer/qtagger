@@ -94,9 +94,27 @@ void QTagger::clearList()
     model->clear();    
 }
 
-bool QTagger::toUnicode()
+bool QTagger::toUnicode(QModelIndexList &indexez)
 {
-    return true;
+
+    qDebug() << indexez.isEmpty();
+    if (indexez.isEmpty() == false)
+    {
+        qSort(indexez.begin(), indexez.end());
+
+        QModelIndexList::iterator icurrent;
+        for (icurrent = indexez.begin(); icurrent != indexez.end(); ++icurrent)
+        {
+            current->setFile(model->getItem((*icurrent).row())->getFile());
+            current->toUtfTag();
+            updateItem((*icurrent));
+        }
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
 void QTagger::setTag(Tag *tag)

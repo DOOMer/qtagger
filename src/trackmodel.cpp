@@ -88,9 +88,19 @@ QVariant TrackModel::data(const QModelIndex &index, int role) const
         default:
             break;
         }
-
-        return QVariant(tracks->at(index.row())->data(index.column())); //->getFile());
+        break;        
+    case Qt::ForegroundRole:
+        return QColor(Qt::red);
         break;
+    case Qt::BackgroundColorRole:
+        {
+            int batch = index.row() % 2;
+            if (batch == 0)
+                return qApp->palette().base();
+            else
+                return qApp->palette().alternateBase();
+            break;
+        }
     case Qt::ToolTipRole:
         return QVariant(tracks->at(index.row())->getFile());
         break;
@@ -128,7 +138,7 @@ bool TrackModel::insertRow(int row, TrackFileItem *track)
     return true;
 }
 
-bool TrackModel::updateRow(QModelIndex &index)
+bool TrackModel::updateRow(const QModelIndex &index)
 {    
     int row = index.row();
     if (row == -1)
