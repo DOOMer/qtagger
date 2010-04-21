@@ -46,13 +46,10 @@ public:
     QVariant data(int colum) const;
     void setData(const QString key, const QString &value);
     QVariant data(const QString &key) const;
-    bool isNoUtf() const;
-    void setNoUtf(bool val);
 
 private:
     QString fileName;
-    QMap<QString, QVariant> trackData;
-    bool latin1;
+    QMap<QString, QVariant> trackData;    
 };
 
 #endif // TRACKFILEITEM_H

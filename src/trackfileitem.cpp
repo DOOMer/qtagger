@@ -72,13 +72,3 @@ void TrackFileItem::setData(QString key, const QString &value)
 {
     trackData.insert(key, value);
 }
-
-bool TrackFileItem::isNoUtf() const
-{
-    return latin1;
-}
-
-void TrackFileItem::setNoUtf(bool val)
-{
-    latin1 = val;
-}
