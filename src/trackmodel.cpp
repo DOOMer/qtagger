@@ -89,9 +89,6 @@ QVariant TrackModel::data(const QModelIndex &index, int role) const
             break;
         }
         break;        
-    case Qt::ForegroundRole:
-        return QColor(Qt::red);
-        break;
     case Qt::BackgroundColorRole:
         {
             int batch = index.row() % 2;
