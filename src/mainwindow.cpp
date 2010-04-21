@@ -49,6 +49,10 @@ void MainWindow::createActions()
     actAboutQt = new QAction(tr("About Qt"), this);
     actQuit = new QAction(tr("Exit"), this);
 
+    actToUnicode->setEnabled(false);
+    actClear->setEnabled(false);
+    actRemove->setEnabled(false);
+
     ui->mainToolBar->addAction(actAddDir);
     ui->mainToolBar->addAction(actAddFiles);
     ui->mainToolBar->addSeparator();
@@ -129,10 +133,11 @@ void MainWindow::slotAboutQt()
 
 void MainWindow::slotAddFiles()
 {
-//    tag = new Tag;
     QStringList fileList = QFileDialog::getOpenFileNames(this, tr("Open File"), QDir::homePath());
 
     app->addFiles(fileList);
+
+    actClear->setEnabled(true);
 
     connect(ui->treeView->selectionModel(), SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)), this, SLOT(slotTreeSelChanged(const QItemSelection &, const QItemSelection &)));
 }
@@ -141,6 +146,8 @@ void MainWindow::slotAddDir()
 {
     QDir addingDir = QFileDialog::getExistingDirectory(this, tr("Add directory"), QDir::homePath(), QFileDialog::ShowDirsOnly);
     app->addDir(addingDir);
+
+    actClear->setEnabled(true);
 
     connect(ui->treeView->selectionModel(), SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)), this, SLOT(slotTreeSelChanged(const QItemSelection &, const QItemSelection &)));
 }
@@ -156,22 +163,57 @@ void MainWindow::slotToUnicode()
 }
 
 void MainWindow::slotRemoveFiles()
-{
+{    
     QModelIndexList selected = ui->treeView->selectionModel()->selectedRows();
-    app->removeFiles(selected);
+    quint8 num = selected.count();
+    // show messagebox
+    QMessageBox msg(QMessageBox::Question,
+                    tr("Delete selected") + QString(" - qTagger"), "" ,
+                    QMessageBox::Yes | QMessageBox::No);
+    msg.setText(tr("Delete selected tracks"));
+    msg.setInformativeText(tr("Do yo want delete selected ") + QString::number(num) + tr(" track(s)?"));
 
-    ui->treeView->clearSelection();
+    int result = msg.exec();
 
-    if (app->getTrackModel()->rowCount() == 0)
+    if (result == QMessageBox::Yes)
     {
-        disconnect(ui->treeView->selectionModel(), SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)), this, SLOT(slotTreeSelChanged(const QItemSelection &, const QItemSelection &)));
+
+        app->removeFiles(selected);
+
+        ui->treeView->clearSelection();
+
+        if (app->getTrackModel()->rowCount() == 0)
+        {
+            actToUnicode->setEnabled(false);
+            actClear->setEnabled(false);
+            actRemove->setEnabled(false);
+
+            disconnect(ui->treeView->selectionModel(), SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)), this, SLOT(slotTreeSelChanged(const QItemSelection &, const QItemSelection &)));
+        }
     }
 }
 
 void MainWindow::slotClear()
 {
-    app->clearList();
-    disconnect(ui->treeView->selectionModel(), SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)), this, SLOT(slotTreeSelChanged(const QItemSelection &, const QItemSelection &)));
+    // show messagebox
+    QMessageBox msg(QMessageBox::Question,
+                    tr("Clear list") + QString(" - qTagger"), "" ,
+                    QMessageBox::Yes | QMessageBox::No);
+    msg.setText(tr("Clear track list"));
+    msg.setInformativeText(tr("Do yo want clear track list?"));
+
+    int result = msg.exec();
+
+    if (result == QMessageBox::Yes)
+    {
+        app->clearList();
+
+        actToUnicode->setEnabled(false);
+        actClear->setEnabled(false);
+        actRemove->setEnabled(false);
+
+        disconnect(ui->treeView->selectionModel(), SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)), this, SLOT(slotTreeSelChanged(const QItemSelection &, const QItemSelection &)));
+    }
 }
 
 void MainWindow::slotSettings()
@@ -181,7 +223,7 @@ void MainWindow::slotSettings()
 
 
 void MainWindow::on_treeView_clicked(QModelIndex index)
-{        
+{
     app->currentTag()->setFile(app->getTrackModel()->getItem(index.row())->getFile());
     ui->editTitle->setText(app->currentTag()->toUtfTagStr(app->currentTag()->title()));
     ui->editAlbum->setText(app->currentTag()->toUtfTagStr(app->currentTag()->album()));
@@ -248,7 +290,16 @@ void MainWindow::slotTreeSelChanged(const QItemSelection &selected, const QItemS
 {
     if (selected.isEmpty() == true)
     {
+        actToUnicode->setEnabled(false);
+
+        actRemove->setEnabled(false);
         clearEditBoxes();
+    }
+    else
+    {
+        actToUnicode->setEnabled(true);
+        actClear->setEnabled(true);
+        actRemove->setEnabled(true);
     }
 }
 

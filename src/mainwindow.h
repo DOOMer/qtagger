@@ -23,7 +23,7 @@
 #include <QMainWindow>
 #include <QDebug>
 //#include <QRect>
-//#include <QDesktopWidget>
+#include <QMessageBox>
 #include <QFileDialog>
 #include <QAction>
 #include <QMenu>
