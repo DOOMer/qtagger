@@ -225,6 +225,11 @@ void MainWindow::slotClear()
 void MainWindow::slotSettings()
 {
     qDebug() << "sjow settings slot";
+    ConfigDialog *configdialog = new ConfigDialog;
+
+    configdialog->exec();
+
+    delete configdialog;
 }
 
 

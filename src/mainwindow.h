@@ -34,7 +34,7 @@
 #include "trackfileitem.h"
 #include "trackmodel.h"
 #include "aboutdialog.h"
-#include <QTextCodec>
+#include "configdialog.h"
 
 namespace Ui {
     class MainWindow;

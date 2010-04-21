@@ -17,7 +17,8 @@ SOURCES += src/main.cpp\
     src/trackmodel.cpp \
     src/qtagger.cpp \
     src/tagaudio.cpp \
-    src/aboutdialog.cpp
+    src/aboutdialog.cpp \
+    src/configdialog.cpp
 
 HEADERS  += src/mainwindow.h \
     src/tag.h \
@@ -25,10 +26,12 @@ HEADERS  += src/mainwindow.h \
     src/trackmodel.h \
     src/qtagger.h \
     src/tagaudio.h \
-    src/aboutdialog.h
+    src/aboutdialog.h \
+    src/configdialog.h
 
 FORMS    += src/mainwindow.ui \
-    src/aboutdialog.ui
+    src/aboutdialog.ui \
+    src/configdialog.ui
 
 CONFIG += link_pkgconfig
 PKGCONFIG += taglib
