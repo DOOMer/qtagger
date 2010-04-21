@@ -72,7 +72,11 @@ private:
     void createActions();
     void clearEditBoxes();
 
+    const QString SELECT_ALL;
+    const QString SELECT_NONE;
+
 private slots:
+    void on_butSelect_clicked();
     void on_butSave_clicked();
     void on_butCancel_clicked();
     void on_treeView_clicked(QModelIndex index);

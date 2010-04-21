@@ -23,7 +23,7 @@
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
-    app(new QTagger)
+    app(new QTagger), SELECT_ALL(tr("Select all")), SELECT_NONE(tr("Select none"))
 {    
     ui->setupUi(this);
     createActions();
@@ -88,6 +88,8 @@ void MainWindow::createActions()
     ui->editYear->setValidator(new QIntValidator(this));
     ui->editTrackNum->setValidator(new QIntValidator(this));
 
+    ui->butSelect->setText(SELECT_ALL);
+
     // connects actions
     connect(actAbout, SIGNAL(triggered()), this, SLOT(slotAbout()));
     connect(actAboutQt, SIGNAL(triggered()), this, SLOT(slotAboutQt()));
@@ -138,6 +140,7 @@ void MainWindow::slotAddFiles()
     app->addFiles(fileList);
 
     actClear->setEnabled(true);
+    ui->butSelect->setEnabled(true);
 
     connect(ui->treeView->selectionModel(), SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)), this, SLOT(slotTreeSelChanged(const QItemSelection &, const QItemSelection &)));
 }
@@ -148,6 +151,7 @@ void MainWindow::slotAddDir()
     app->addDir(addingDir);
 
     actClear->setEnabled(true);
+    ui->butSelect->setEnabled(true);
 
     connect(ui->treeView->selectionModel(), SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)), this, SLOT(slotTreeSelChanged(const QItemSelection &, const QItemSelection &)));
 }
@@ -187,6 +191,7 @@ void MainWindow::slotRemoveFiles()
             actToUnicode->setEnabled(false);
             actClear->setEnabled(false);
             actRemove->setEnabled(false);
+            ui->butSelect->setEnabled(false);
 
             disconnect(ui->treeView->selectionModel(), SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)), this, SLOT(slotTreeSelChanged(const QItemSelection &, const QItemSelection &)));
         }
@@ -211,6 +216,7 @@ void MainWindow::slotClear()
         actToUnicode->setEnabled(false);
         actClear->setEnabled(false);
         actRemove->setEnabled(false);
+        ui->butSelect->setEnabled(false);
 
         disconnect(ui->treeView->selectionModel(), SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)), this, SLOT(slotTreeSelChanged(const QItemSelection &, const QItemSelection &)));
     }
@@ -294,12 +300,14 @@ void MainWindow::slotTreeSelChanged(const QItemSelection &selected, const QItemS
 
         actRemove->setEnabled(false);
         clearEditBoxes();
+        ui->butSelect->setText(SELECT_ALL);
     }
     else
     {
         actToUnicode->setEnabled(true);
         actClear->setEnabled(true);
         actRemove->setEnabled(true);
+        ui->butSelect->setText(SELECT_NONE);
     }
 }
 
@@ -315,4 +323,18 @@ void MainWindow::clearEditBoxes()
     ui->labBitrate->clear();
     ui->labSampleRate->clear();
     ui->labTime->clear();
+}
+
+void MainWindow::on_butSelect_clicked()
+{
+    bool selected = ui->treeView->selectionModel()->selection().isEmpty();
+
+    if (selected == true)
+    {
+        ui->treeView->selectAll();
+    }
+    else
+    {
+        ui->treeView->clearSelection();
+    }
 }
