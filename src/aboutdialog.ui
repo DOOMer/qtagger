@@ -43,7 +43,7 @@ p, li { white-space: pre-wrap; }
     </rect>
    </property>
    <property name="text">
-    <string>v.0.82</string>
+    <string>v.0.83</string>
    </property>
   </widget>
   <widget class="QPushButton" name="butClose">
