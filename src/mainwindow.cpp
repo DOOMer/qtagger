@@ -26,6 +26,7 @@ MainWindow::MainWindow(QWidget *parent) :
     app(new QTagger), SELECT_ALL(tr("Select all")), SELECT_NONE(tr("Select none"))
 {    
     ui->setupUi(this);
+    updateUI();
     createActions();
     model = new TrackModel(this);
 
@@ -228,11 +229,31 @@ void MainWindow::slotSettings()
     qDebug() << "sjow settings slot";
     ConfigDialog *configdialog = new ConfigDialog;
 
-    configdialog->exec();
+    quint8 resilt = configdialog->exec();
+    if (resilt == QDialog::Accepted)
+    {
+        updateUI();
+    }
 
     delete configdialog;
 }
 
+void MainWindow::updateUI()
+{
+    int tbType = app->config()->value(KEY_TOOLBAR_DYSPLAY).toUInt();
+    qDebug() << "tbType == " << tbType;
+    switch (tbType)
+    {
+    case CfgFlags::tbTextIcon:
+        ui->mainToolBar->setToolButtonStyle(Qt::ToolButtonTextBesideIcon); break;
+    case CfgFlags::tbIcon:
+        ui->mainToolBar->setToolButtonStyle(Qt::ToolButtonIconOnly); break;
+    case CfgFlags::tbText:
+        ui->mainToolBar->setToolButtonStyle(Qt::ToolButtonTextOnly); break;
+    default:
+        ui->mainToolBar->setToolButtonStyle(Qt::ToolButtonTextBesideIcon); break;
+    }
+}
 
 void MainWindow::on_treeView_clicked(QModelIndex index)
 {

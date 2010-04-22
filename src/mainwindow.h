@@ -89,6 +89,7 @@ private slots:
     void slotRemoveFiles();
     void slotClear();
     void slotSettings();
+    void updateUI();
     void slotTreeSelChanged(const QItemSelection &selected, const QItemSelection &deselected);
 };
 

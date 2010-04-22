@@ -48,6 +48,7 @@ public:
     bool toUnicode(QModelIndexList &indexez);
     void setTag(Tag *tag);
     Tag* currentTag();
+    Config* config();
 signals:
 
 protected:

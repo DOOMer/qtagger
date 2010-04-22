@@ -128,3 +128,8 @@ Tag* QTagger::currentTag()
 {
     return current;
 }
+
+Config* QTagger::config()
+{
+    return Config::instance();
+}

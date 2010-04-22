@@ -57,10 +57,10 @@ void Config::loadSettings()
 
         loader.beginGroup("Main");
         confData.insert(KEY_SOURCE_ENCODING, loader.value(KEY_SOURCE_ENCODING, DEFAULT_ENCODING).toString());
-        loader.endArray();
+        loader.endGroup();;
         loader.beginGroup("Display");
         confData.insert(KEY_TOOLBAR_DYSPLAY, loader.value(KEY_TOOLBAR_DYSPLAY, DEFAULT_TOOLBAR_TYPE));
-        loader.endArray();
+        loader.endGroup();;
         qDebug() << "=== " << confData;
     }
 }
