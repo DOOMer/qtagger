@@ -24,3 +24,13 @@ void ConfigDialog::changeEvent(QEvent *e)
         break;
     }
 }
+
+void ConfigDialog::on_butCancel_clicked()
+{
+    reject();
+}
+
+void ConfigDialog::on_butSave_clicked()
+{
+    accept();
+}

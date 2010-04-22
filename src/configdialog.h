@@ -20,6 +20,10 @@ protected:
 
 private:
     Ui::ConfigDialog *ui;
+
+private slots:
+    void on_butSave_clicked();
+    void on_butCancel_clicked();
 };
 
 #endif // CONFIGDIALOG_H
