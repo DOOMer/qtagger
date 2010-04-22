@@ -241,7 +241,7 @@ void MainWindow::slotSettings()
 void MainWindow::updateUI()
 {
     int tbType = app->config()->value(KEY_TOOLBAR_DYSPLAY).toUInt();
-    qDebug() << "tbType == " << tbType;
+    qDebug() << "tbType =!!!!= " << tbType;
     switch (tbType)
     {
     case CfgFlags::tbTextIcon:

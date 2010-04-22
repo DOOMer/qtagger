@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include <QTextCodec>
+#include <QMap>
 #include <QDebug>
 
 #include "config.h"

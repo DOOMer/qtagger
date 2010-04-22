@@ -10,18 +10,55 @@ ConfigDialog::ConfigDialog(QWidget *parent) :
     switch(conf->value(KEY_TOOLBAR_DYSPLAY).toInt())
     {
     case CfgFlags::tbTextIcon:
-        ui->rbTextIcon->setChecked(true); break;
+        {
+            ui->rbTextIcon->setChecked(true);
+            toolbarType = CfgFlags::tbTextIcon;
+            break;
+        }
     case CfgFlags::tbIcon:
-        ui->rbIcon->setChecked(true); break;
+        {
+            ui->rbIcon->setChecked(true);
+            toolbarType = CfgFlags::tbIcon;
+            break;
+        }
     case CfgFlags::tbText:
-        ui->rbText->setChecked(true); break;
+        {
+            ui->rbText->setChecked(true);
+            toolbarType = CfgFlags::tbText;
+            break;
+        }
     default:
-        ui->rbTextIcon->setChecked(true); break;
+        ui->rbTextIcon->setChecked(true);
+        toolbarType = CfgFlags::tbTextIcon;
+        break;
     }
 
-    ui->cbxCodecs->setEditable(true);
-    ui->cbxCodecs->setEditText(conf->value(KEY_SOURCE_ENCODING).toString());
-//        qDebug() << "conf->value(KEY_SOURCE_ENCODING).toString() " << conf->value(KEY_SOURCE_ENCODING).toString();
+    QList<QTextCodec *> codecs;
+
+
+
+    // codecs
+    QMap<QString, QTextCodec *> codecMap;
+
+    foreach (int mib, QTextCodec::availableMibs())
+    {
+        QTextCodec *codec = QTextCodec::codecForMib(mib);
+
+        QString sortKey = codec->name().toUpper();
+
+        codecMap.insert(sortKey, codec);
+    }
+    codecs = codecMap.values();
+
+    // iserting combobox items
+    foreach (QTextCodec *codec, codecs)
+    {
+        ui->cbxCodecs->addItem(codec->name(), codec->mibEnum());
+    }
+
+//    ui->cbxCodecs->setEditable(true);
+    QString seletedCodec = conf->value(KEY_SOURCE_ENCODING).toString();
+    ui->cbxCodecs->setCurrentIndex(ui->cbxCodecs->findText(seletedCodec));
 }
 
 ConfigDialog::~ConfigDialog()
@@ -52,7 +89,9 @@ void ConfigDialog::on_butSave_clicked()
 {
     qDebug() << "select " << toolbarType;
     conf->setValue(KEY_TOOLBAR_DYSPLAY, QVariant(toolbarType));
-    qDebug() << "KEY_TOOLBAR_DYSPLAY" << conf->value(KEY_TOOLBAR_DYSPLAY);
+
+    qDebug() << ui->cbxCodecs->currentText();
+    conf->setValue(KEY_SOURCE_ENCODING, QVariant(ui->cbxCodecs->currentText()));
     conf->saveSettings();
     accept();
 }
