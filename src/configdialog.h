@@ -2,6 +2,10 @@
 #define CONFIGDIALOG_H
 
 #include <QDialog>
+#include <QTextCodec>
+#include <QDebug>
+
+#include "config.h"
 
 namespace Ui {
     class ConfigDialog;
@@ -17,11 +21,16 @@ public:
 
 protected:
     void changeEvent(QEvent *e);
+    Config *conf;
 
 private:
     Ui::ConfigDialog *ui;
+    CfgFlags::ToolbarType toolbarType;
 
 private slots:
+    void on_rbText_clicked();
+    void on_rbIcon_clicked();
+    void on_rbTextIcon_clicked();
     void on_butSave_clicked();
     void on_butCancel_clicked();
 };

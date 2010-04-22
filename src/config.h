@@ -16,6 +16,17 @@ const quint8 DEFAULT_TOOLBAR_TYPE = 0;
 const QString KEY_SOURCE_ENCODING = "soueceEncodeing";
 const QString KEY_TOOLBAR_DYSPLAY = "toolbarType";
 
+namespace CfgFlags
+{
+    enum ToolbarType
+    {
+        tbTextIcon = 0,
+        tbIcon = 1,
+        tbText =2
+    };
+
+};
+
 class Config
 {
 public:

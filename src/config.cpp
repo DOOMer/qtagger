@@ -72,12 +72,12 @@ void Config::saveSettings()
 
     // write settings
     saver.beginGroup("Main");
-    saver.setValue(KEY_SOURCE_ENCODING, QVariant(DEFAULT_ENCODING).toString());
-    saver.endArray();
+    saver.setValue(KEY_SOURCE_ENCODING, confData[KEY_SOURCE_ENCODING].toString());
+    saver.endGroup();;
 
     saver.beginGroup("Display");
-    saver.setValue(KEY_TOOLBAR_DYSPLAY, QVariant(DEFAULT_TOOLBAR_TYPE).toUInt());
-    saver.endArray();
+    saver.setValue(KEY_TOOLBAR_DYSPLAY, confData[KEY_TOOLBAR_DYSPLAY].toUInt());
+    saver.endGroup();;
 }
 
 void Config::defaultSettings()
