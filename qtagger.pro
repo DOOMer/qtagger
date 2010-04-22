@@ -18,7 +18,8 @@ SOURCES += src/main.cpp\
     src/qtagger.cpp \
     src/tagaudio.cpp \
     src/aboutdialog.cpp \
-    src/configdialog.cpp
+    src/configdialog.cpp \
+    src/config.cpp
 
 HEADERS  += src/mainwindow.h \
     src/tag.h \
@@ -27,7 +28,8 @@ HEADERS  += src/mainwindow.h \
     src/qtagger.h \
     src/tagaudio.h \
     src/aboutdialog.h \
-    src/configdialog.h
+    src/configdialog.h \
+    src/config.h
 
 FORMS    += src/mainwindow.ui \
     src/aboutdialog.ui \

@@ -22,13 +22,16 @@
 
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
+    QApplication app(argc, argv);
+    app.setApplicationName("qTagger");
+    app.setApplicationVersion("0.84");
 
     MainWindow w;
+
 #if defined(Q_WS_S60) || defined(Q_WS_MAEMO_5)
     w.showMaximized();
 #else
     w.show();
 #endif
-    return a.exec();
+    return app.exec();
 }

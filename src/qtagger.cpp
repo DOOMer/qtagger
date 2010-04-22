@@ -20,7 +20,7 @@
 #include "qtagger.h"
 
 QTagger::QTagger(QObject *parent) :
-    QObject(parent)
+    QObject(parent), conf(Config::instance())
 {
     model = new TrackModel;
     model->setList(tracks);
@@ -28,9 +28,11 @@ QTagger::QTagger(QObject *parent) :
 }
 
 QTagger::~QTagger()
-{
+{    
     delete current;
-    delete model;    
+    delete model;
+    qDebug() << "Destruced app";
+    conf->killInstance();
 }
 
 TrackModel* QTagger::getTrackModel()

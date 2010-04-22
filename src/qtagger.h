@@ -26,6 +26,7 @@
 #include <QDir>
 #include <QDebug>
 
+#include "config.h"
 #include "tag.h"
 #include "trackmodel.h"
 #include "trackfileitem.h"
@@ -48,6 +49,9 @@ public:
     void setTag(Tag *tag);
     Tag* currentTag();
 signals:
+
+protected:
+    Config *conf;
 
 public slots:
 
