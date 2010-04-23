@@ -74,8 +74,10 @@ TagLib::String Tag::toTagLibStr(QString str)
 {
     TagLib::String taglibStr(str.toUtf8().data(), TagLib::String::UTF8);
     if (taglibStr.isLatin1() == true)
-    {
-        QTextCodec *codec = QTextCodec::codecForName("Windows-1251");
+    {        
+        QString sourceEncoding = Config::instance()->value(KEY_SOURCE_ENCODING).toString();
+
+        QTextCodec *codec = QTextCodec::codecForName(sourceEncoding.toAscii());
         QByteArray arr;
         arr.append(str);
         str = codec->toUnicode(arr);
@@ -104,7 +106,8 @@ QString& Tag::toUtfTagStr(QString& str)
     TagLib::String taglibStr(str.toUtf8().data(), TagLib::String::UTF8);
     if (taglibStr.isLatin1() == true)
     {
-        QTextCodec *codec = QTextCodec::codecForName("Windows-1251");
+        QString sourceEncoding = Config::instance()->value(KEY_SOURCE_ENCODING).toString();
+        QTextCodec *codec = QTextCodec::codecForName(sourceEncoding.toAscii());
         QByteArray arr;
         arr.append(str);
         str = codec->toUnicode(arr);

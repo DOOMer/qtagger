@@ -28,6 +28,7 @@
 #include <taglib/tag.h>
 
 #include "tagaudio.h"
+#include "config.h"
 
 struct TagData
 {
