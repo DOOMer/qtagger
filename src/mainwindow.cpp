@@ -172,50 +172,25 @@ void MainWindow::slotToUnicode()
 void MainWindow::slotRemoveFiles()
 {    
     QModelIndexList selected = ui->treeView->selectionModel()->selectedRows();
-    quint8 num = selected.count();
-    // show messagebox
-    QMessageBox msg(QMessageBox::Question,
-                    tr("Delete selected") + QString(" - qTagger"), "" ,
-                    QMessageBox::Yes | QMessageBox::No);
-    msg.setText(tr("Delete selected tracks"));
-    msg.setInformativeText(tr("Do yo want delete selected ") + QString::number(num) + tr(" track(s)?"));
+//    quint8 num = selected.count();
+//    // show messagebox
+//    QMessageBox msg(QMessageBox::Question,
+//                    tr("Delete selected") + QString(" - qTagger"), "" ,
+//                    QMessageBox::Yes | QMessageBox::No);
+//    msg.setText(tr("Delete selected tracks"));
+//    msg.setInformativeText(tr("Do yo want delete selected ") + QString::number(num) + tr(" track(s)?"));
 
-    int result = msg.exec();
+//    int result = msg.exec();
 
-    if (result == QMessageBox::Yes)
+//    if (result == QMessageBox::Yes)
+//    {
+
+    app->removeFiles(selected);
+
+    ui->treeView->clearSelection();
+
+    if (app->getTrackModel()->rowCount() == 0)
     {
-
-        app->removeFiles(selected);
-
-        ui->treeView->clearSelection();
-
-        if (app->getTrackModel()->rowCount() == 0)
-        {
-            actToUnicode->setEnabled(false);
-            actClear->setEnabled(false);
-            actRemove->setEnabled(false);
-            ui->butSelect->setEnabled(false);
-
-            disconnect(ui->treeView->selectionModel(), SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)), this, SLOT(slotTreeSelChanged(const QItemSelection &, const QItemSelection &)));
-        }
-    }
-}
-
-void MainWindow::slotClear()
-{
-    // show messagebox
-    QMessageBox msg(QMessageBox::Question,
-                    tr("Clear list") + QString(" - qTagger"), "" ,
-                    QMessageBox::Yes | QMessageBox::No);
-    msg.setText(tr("Clear track list"));
-    msg.setInformativeText(tr("Do yo want clear track list?"));
-
-    int result = msg.exec();
-
-    if (result == QMessageBox::Yes)
-    {
-        app->clearList();
-
         actToUnicode->setEnabled(false);
         actClear->setEnabled(false);
         actRemove->setEnabled(false);
@@ -223,6 +198,31 @@ void MainWindow::slotClear()
 
         disconnect(ui->treeView->selectionModel(), SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)), this, SLOT(slotTreeSelChanged(const QItemSelection &, const QItemSelection &)));
     }
+//    }
+}
+
+void MainWindow::slotClear()
+{
+    // show messagebox
+//    QMessageBox msg(QMessageBox::Question,
+//                    tr("Clear list") + QString(" - qTagger"), "" ,
+//                    QMessageBox::Yes | QMessageBox::No);
+//    msg.setText(tr("Clear track list"));
+//    msg.setInformativeText(tr("Do yo want clear track list?"));
+
+//    int result = msg.exec();
+
+//    if (result == QMessageBox::Yes)
+//    {
+    app->clearList();
+
+    actToUnicode->setEnabled(false);
+    actClear->setEnabled(false);
+    actRemove->setEnabled(false);
+    ui->butSelect->setEnabled(false);
+
+    disconnect(ui->treeView->selectionModel(), SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)), this, SLOT(slotTreeSelChanged(const QItemSelection &, const QItemSelection &)));
+//    }
 }
 
 void MainWindow::slotSettings()

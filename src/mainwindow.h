@@ -22,8 +22,6 @@
 
 #include <QMainWindow>
 #include <QDebug>
-//#include <QRect>
-#include <QMessageBox>
 #include <QFileDialog>
 #include <QAction>
 #include <QMenu>
