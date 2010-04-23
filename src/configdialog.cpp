@@ -6,7 +6,7 @@ ConfigDialog::ConfigDialog(QWidget *parent) :
 
 {
     ui->setupUi(this);
-
+    setWindowTitle(qApp->applicationName() + " - " + tr("Settings"));
     switch(conf->value(KEY_TOOLBAR_DYSPLAY).toInt())
     {
     case CfgFlags::tbTextIcon:

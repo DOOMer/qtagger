@@ -25,6 +25,9 @@ AboutDialog::AboutDialog(QWidget *parent) :
     ui(new Ui::aboutdialog)
 {
     ui->setupUi(this);
+    ui->labAppName->setText("<div align=center><b>" +qApp->applicationName() + " " + qApp->applicationVersion() + "</b></div>");
+    ui->labBuildDate->setText(ui->labBuildDate->text() + __DATE__);
+    ui->labUsingQt->setText(ui->labUsingQt->text() + qVersion());
 }
 
 AboutDialog::~AboutDialog()

@@ -26,6 +26,7 @@ MainWindow::MainWindow(QWidget *parent) :
     app(new QTagger), SELECT_ALL(tr("Select all")), SELECT_NONE(tr("Select none"))
 {    
     ui->setupUi(this);
+    setWindowTitle(qApp->applicationName());
     updateUI();
     createActions();
     model = new TrackModel(this);
