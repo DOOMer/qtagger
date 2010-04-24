@@ -20,7 +20,7 @@
 #include "trackfileitem.h"
 
 TrackFileItem::TrackFileItem(const QString &file, Tag *tag)
-    :fileName(file) // fileTag(tag),
+    :fileName(file)
 {
     tag->setFile(file);
     tag->readInfo();

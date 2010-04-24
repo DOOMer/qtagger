@@ -29,14 +29,10 @@ Config::Config()
 Config* Config::instance()
 {
     if (!ptrInstance)
-    {
-        qDebug() << "no ptr";
+    {        
         ptrInstance = new Config;
     }
-    else
-    {
-        qDebug() << "ptr existinmg";
-    }
+
     return ptrInstance;
 }
 
@@ -44,7 +40,6 @@ void Config::killInstance()
 {
     if (ptrInstance)
     {
-        qDebug() << "killing..... ";
         delete ptrInstance;
         ptrInstance = 0;
     }
@@ -62,8 +57,6 @@ QString Config::configFile()
 
 void Config::loadSettings()
 {
-    qDebug() << "load settings";
-
     // check existing file
     if (QFile::exists(Config::configFile()) == false)
     {
@@ -72,7 +65,6 @@ void Config::loadSettings()
     else
     {
         QSettings loader(Config::configFile().toAscii(), QSettings::IniFormat);
-        qDebug() << "_prepare()" << loader.fileName();
 
         loader.beginGroup("Main");
         confData.insert(KEY_SOURCE_ENCODING, loader.value(KEY_SOURCE_ENCODING, DEFAULT_ENCODING).toString());
@@ -80,13 +72,11 @@ void Config::loadSettings()
         loader.beginGroup("Display");
         confData.insert(KEY_TOOLBAR_DYSPLAY, loader.value(KEY_TOOLBAR_DYSPLAY, DEFAULT_TOOLBAR_TYPE));
         loader.endGroup();;
-        qDebug() << "=== " << confData;
     }
 }
 
 void Config::saveSettings()
 {
-    qDebug() << "save settings";
     QSettings saver(Config::configFile().toAscii(), QSettings::IniFormat);
 
     // write settings

@@ -59,7 +59,6 @@ QVariant TrackModel::headerData(int section, Qt::Orientation orientation, int ro
         default:
             break;
         }
-//        str = "Column " + QString::number(section + 1);
     }
 
     return QVariant( str);
@@ -129,7 +128,7 @@ bool TrackModel::insertRow(int row, TrackFileItem *track)
     }
 
     beginInsertRows(QModelIndex(), row, row);
-//    tracks.insert(row, track);
+
     tracks->append(track);
     endInsertRows();
     return true;

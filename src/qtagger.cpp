@@ -32,7 +32,7 @@ QTagger::~QTagger()
 {    
     delete current;
     delete model;
-    qDebug() << "Destruced app";
+
     conf->killInstance();
 }
 
@@ -59,6 +59,7 @@ void QTagger::addFiles(QStringList &files)
 void QTagger::iterateDir(QDir &selectDir)
 {
     _lastAddedDir = selectDir.path();
+    addDir(selectDir);
     QDirIterator it(selectDir.path(),QDir::Dirs|QDir::NoDotAndDotDot, QDirIterator::Subdirectories);
     while (it.hasNext()) {
         selectDir.setPath(it.next());
@@ -109,9 +110,7 @@ void QTagger::clearList()
 }
 
 bool QTagger::toUnicode(QModelIndexList &indexez)
-{
-
-    qDebug() << indexez.isEmpty();
+{    
     if (indexez.isEmpty() == false)
     {
         qSort(indexez.begin(), indexez.end());

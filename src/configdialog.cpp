@@ -75,7 +75,6 @@ ConfigDialog::ConfigDialog(QWidget *parent) :
         ui->cbxCodecs->addItem(codec->name(), codec->mibEnum());
     }
 
-//    ui->cbxCodecs->setEditable(true);
     QString seletedCodec = conf->value(KEY_SOURCE_ENCODING).toString();
     ui->cbxCodecs->setCurrentIndex(ui->cbxCodecs->findText(seletedCodec));
 }
@@ -106,10 +105,8 @@ void ConfigDialog::on_butCancel_clicked()
 
 void ConfigDialog::on_butSave_clicked()
 {
-    qDebug() << "select " << toolbarType;
     conf->setValue(KEY_TOOLBAR_DYSPLAY, QVariant(toolbarType));
 
-    qDebug() << ui->cbxCodecs->currentText();
     conf->setValue(KEY_SOURCE_ENCODING, QVariant(ui->cbxCodecs->currentText()));
     conf->saveSettings();
     accept();

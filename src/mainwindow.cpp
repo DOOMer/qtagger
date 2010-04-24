@@ -97,8 +97,6 @@ void MainWindow::createActions()
     menuTrackContext->addAction(actRemove);
     menuTrackContext->addAction(actClear);
 
-//    ui->treeView->
-
     ui->editYear->setValidator(new QIntValidator(this));
     ui->editTrackNum->setValidator(new QIntValidator(this));
 
@@ -162,7 +160,7 @@ void MainWindow::slotAddFiles()
 void MainWindow::slotAddDir()
 {
     QDir addingDir = QFileDialog::getExistingDirectory(this, tr("Add directory"), app->lastAddedDir(), QFileDialog::ShowDirsOnly);
-//    app->addDir(addingDir);
+
     app->iterateDir(addingDir);
 
     actClear->setEnabled(true);
@@ -239,7 +237,6 @@ void MainWindow::slotClear()
 
 void MainWindow::slotSettings()
 {
-    qDebug() << "sjow settings slot";
     ConfigDialog *configdialog = new ConfigDialog;
 
     quint8 resilt = configdialog->exec();
@@ -254,7 +251,7 @@ void MainWindow::slotSettings()
 void MainWindow::updateUI()
 {
     int tbType = app->config()->value(KEY_TOOLBAR_DYSPLAY).toUInt();
-    qDebug() << "tbType =!!!!= " << tbType;
+
     switch (tbType)
     {
     case CfgFlags::tbTextIcon:
@@ -284,9 +281,6 @@ void MainWindow::on_treeView_clicked(QModelIndex index)
     ui->labBitrate->setText(tr("Bitrate: ") + QString::number(app->currentTag()->audio->bitrate()) + " kbps");
     ui->labSampleRate->setText(tr("Sample rate: ") + QString::number(app->currentTag()->audio->sampleRate()) + " Hz");
         ui->labTime->setText(tr("Time: ") + app->currentTag()->audio->timeStr());
-//        QString str = app->currentTag()->title();
-
-//        qDebug() << "to local 8 bit " << str;
 }
 
 void MainWindow::on_butCancel_clicked()
@@ -325,11 +319,6 @@ void MainWindow::on_butSave_clicked()
     {
         qDebug() << "false saving";
     }
-//    QTextCodec *codec = QTextCodec::codecForName("CP1251");
-//    QTextCodec::setCodecForCStrings(codec);
-//    QString str = app->currentTag()->title().toLatin1();
-//    qDebug() << str;
-
 }
 
 void MainWindow::slotTreeSelChanged(const QItemSelection &selected, const QItemSelection &deselected)
