@@ -25,6 +25,7 @@ QTagger::QTagger(QObject *parent) :
     model = new TrackModel;
     model->setList(tracks);
     current = new Tag;
+    _lastAddedDir = QDir::homePath();
 }
 
 QTagger::~QTagger()
@@ -57,6 +58,7 @@ void QTagger::addFiles(QStringList &files)
 
 void QTagger::iterateDir(QDir &selectDir)
 {
+    _lastAddedDir = selectDir.path();
     QDirIterator it(selectDir.path(),QDir::Dirs|QDir::NoDotAndDotDot, QDirIterator::Subdirectories);
     while (it.hasNext()) {
         selectDir.setPath(it.next());
@@ -142,4 +144,10 @@ Tag* QTagger::currentTag()
 Config* QTagger::config()
 {
     return Config::instance();
+}
+
+QString& QTagger::lastAddedDir()
+{
+    QString& retDir = _lastAddedDir;
+    return retDir;
 }

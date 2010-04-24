@@ -149,7 +149,7 @@ void MainWindow::slotAboutQt()
 
 void MainWindow::slotAddFiles()
 {
-    QStringList fileList = QFileDialog::getOpenFileNames(this, tr("Open File"), QDir::homePath());
+    QStringList fileList = QFileDialog::getOpenFileNames(this, tr("Open File"), app->lastAddedDir());
 
     app->addFiles(fileList);
 
@@ -161,7 +161,7 @@ void MainWindow::slotAddFiles()
 
 void MainWindow::slotAddDir()
 {
-    QDir addingDir = QFileDialog::getExistingDirectory(this, tr("Add directory"), QDir::homePath(), QFileDialog::ShowDirsOnly);
+    QDir addingDir = QFileDialog::getExistingDirectory(this, tr("Add directory"), app->lastAddedDir(), QFileDialog::ShowDirsOnly);
 //    app->addDir(addingDir);
     app->iterateDir(addingDir);
 

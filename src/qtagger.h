@@ -51,6 +51,7 @@ public:
     void setTag(Tag *tag);
     Tag* currentTag();
     Config* config();
+    QString& lastAddedDir();
 signals:
 
 protected:
@@ -62,6 +63,7 @@ private:
     QList<TrackFileItem *> tracks;
     TrackModel *model;
     Tag *current;
+    QString _lastAddedDir;
 };
 
 #endif // QTAGGER_H
