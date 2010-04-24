@@ -55,6 +55,16 @@ void QTagger::addFiles(QStringList &files)
     }
 }
 
+void QTagger::iterateDir(QDir &selectDir)
+{
+    QDirIterator it(selectDir.path(),QDir::Dirs|QDir::NoDotAndDotDot, QDirIterator::Subdirectories);
+    while (it.hasNext()) {
+        selectDir.setPath(it.next());
+        addDir(selectDir);
+        qApp->processEvents();
+    }
+}
+
 void QTagger::addDir(QDir &selectDir)
 {
     QStringList fileFilters;

@@ -162,7 +162,8 @@ void MainWindow::slotAddFiles()
 void MainWindow::slotAddDir()
 {
     QDir addingDir = QFileDialog::getExistingDirectory(this, tr("Add directory"), QDir::homePath(), QFileDialog::ShowDirsOnly);
-    app->addDir(addingDir);
+//    app->addDir(addingDir);
+    app->iterateDir(addingDir);
 
     actClear->setEnabled(true);
     ui->butSelect->setEnabled(true);

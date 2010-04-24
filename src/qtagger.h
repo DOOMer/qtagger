@@ -24,6 +24,7 @@
 #include <QList>
 #include <QStringList>
 #include <QDir>
+#include <QDirIterator>
 #include <QDebug>
 
 #include "config.h"
@@ -42,6 +43,7 @@ public:
     void createTrackItem(const QString &file);
     void addFiles(QStringList &files);
     void addDir(QDir &selectDir);
+    void iterateDir(QDir &selectDir);
     void removeFiles(QModelIndexList &indexez);
     bool updateItem(QModelIndex &index);
     void clearList();
