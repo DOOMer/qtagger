@@ -25,6 +25,8 @@
 #include <QDebug>
 
 #include <taglib/fileref.h>
+#include <taglib/id3v2tag.h>
+#include <taglib/mpegfile.h>
 #include <taglib/tag.h>
 
 #include "tagaudio.h"
@@ -46,11 +48,11 @@ class Tag
 public:
     Tag();
     Tag(const QString &file);
-    ~Tag();
+    virtual ~Tag();
 
     TagAudio *audio;
-    void readInfo();    
-    bool writeInfo();
+    virtual void readInfo();
+    virtual bool writeInfo();
 
     void setTitle(const QString &title);
     void setArtist(const QString &artist);

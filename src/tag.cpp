@@ -145,13 +145,16 @@ void Tag::readInfo()
 
 
 // write tag info to file
+// TODO -- moved to separete sybclass
 bool Tag::writeInfo()
 {
     TagLib::FileRef ref(filename.toLocal8Bit());
 
     if (ref.isNull() == false && ref.tag())
     {
-        TagLib::Tag *fileTag = ref.tag();
+
+        TagLib::MPEG::File file(ref.file()->name());
+        TagLib::ID3v2::Tag *fileTag = file.ID3v2Tag(true);
 
         fileTag->setTitle(toTagLibStr(title()));
         fileTag->setAlbum(toTagLibStr(album()));
@@ -161,7 +164,7 @@ bool Tag::writeInfo()
         fileTag->setYear(year());
         fileTag->setTrack(trackNum());
 
-        return ref.save();
+        return file.save();
     }
     else
     {
