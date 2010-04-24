@@ -69,6 +69,7 @@ void MainWindow::createActions()
 
     menuFile = new QMenu(tr("File"), this);
     menuHelp = new QMenu(tr("Help"), this);
+    menuTrackContext = new QMenu(this);
 
     menuFile->addAction(actAddFiles);
     menuFile->addAction(actAddDir);
@@ -87,6 +88,16 @@ void MainWindow::createActions()
 
     ui->menuBar->addMenu(menuFile);
     ui->menuBar->addMenu(menuHelp);
+
+    menuTrackContext->addAction(actAddDir);
+    menuTrackContext->addAction(actAddFiles);
+    menuTrackContext->addSeparator();
+    menuTrackContext->addAction(actToUnicode);
+    menuTrackContext->addSeparator();
+    menuTrackContext->addAction(actRemove);
+    menuTrackContext->addAction(actClear);
+
+//    ui->treeView->
 
     ui->editYear->setValidator(new QIntValidator(this));
     ui->editTrackNum->setValidator(new QIntValidator(this));
@@ -365,4 +376,11 @@ void MainWindow::on_butSelect_clicked()
     {
         ui->treeView->clearSelection();
     }
+}
+
+// executing context menu on track list
+void MainWindow::on_treeView_customContextMenuRequested(QPoint pos)
+{
+    QWidget* w = static_cast<QWidget*>(QObject::sender());
+    menuTrackContext->exec(w->mapToGlobal(pos));
 }

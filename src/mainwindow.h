@@ -62,6 +62,7 @@ private:
 
     QMenu *menuFile;
     QMenu *menuHelp;
+    QMenu *menuTrackContext;
 
     TrackModel *model;
 
@@ -74,6 +75,7 @@ private:
     const QString SELECT_NONE;
 
 private slots:
+    void on_treeView_customContextMenuRequested(QPoint pos);
     void on_butSelect_clicked();
     void on_butSave_clicked();
     void on_butCancel_clicked();
