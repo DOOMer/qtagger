@@ -37,3 +37,6 @@ FORMS    += src/mainwindow.ui \
 
 CONFIG += link_pkgconfig
 PKGCONFIG += taglib
+
+OTHER_FILES += \
+    CMakeLists.txt
