@@ -1,1 +1,1 @@
-qTagger -- v0.83
+qTagger -- v0.92
