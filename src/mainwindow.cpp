@@ -269,9 +269,9 @@ void MainWindow::on_treeView_clicked(QModelIndex index)
     ui->editTrackNum->setText(QString::number(app->currentTag()->trackNum()));
     ui->editComment->setPlainText(app->currentTag()->toUtfTagStr(app->currentTag()->comment()));
 
-    ui->labBitrate->setText("Bitrate:" + QString::number(app->currentTag()->audio->bitrate()));
-    ui->labSampleRate->setText("Sample rate:" + QString::number(app->currentTag()->audio->sampleRate()));
-        ui->labTime->setText("Time:" + app->currentTag()->audio->timeStr());
+    ui->labBitrate->setText(tr("Bitrate: ") + QString::number(app->currentTag()->audio->bitrate()) + " kbps");
+    ui->labSampleRate->setText(tr("Sample rate: ") + QString::number(app->currentTag()->audio->sampleRate()) + " Hz");
+        ui->labTime->setText(tr("Time: ") + app->currentTag()->audio->timeStr());
 //        QString str = app->currentTag()->title();
 
 //        qDebug() << "to local 8 bit " << str;
