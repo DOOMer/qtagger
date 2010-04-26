@@ -44,7 +44,6 @@ namespace CfgFlags
         tbIcon = 1,
         tbText =2
     };
-
 };
 
 class Config

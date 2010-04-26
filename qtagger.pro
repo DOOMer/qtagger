@@ -40,3 +40,6 @@ PKGCONFIG += taglib
 
 OTHER_FILES += \
     CMakeLists.txt
+
+RESOURCES += \
+    qtagger.qrc

@@ -26,6 +26,7 @@
 #include <QAction>
 #include <QMenu>
 #include <QItemSelection>
+#include <QIcon>
 
 #include "qtagger.h"
 #include "tag.h"

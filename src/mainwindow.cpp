@@ -42,15 +42,32 @@ MainWindow::~MainWindow()
 
 void MainWindow::createActions()
 {
-    actAddFiles = new QAction(tr("Add Files"), this);
-    actAddDir = new QAction(tr("Add Dir"), this);
-    actToUnicode = new QAction(tr("To Unicode"), this);
-    actRemove = new QAction(tr("Remover"), this);
-    actClear = new QAction(tr("Clear"), this);
-    actSettings = new QAction(tr("Settings"), this);
-    actAbout = new QAction(tr("About"), this);
-    actAboutQt = new QAction(tr("About Qt"), this);
-    actQuit = new QAction(tr("Exit"), this);
+    QIcon iconAddFile(":/icons/default/add_file.png");
+    actAddFiles = new QAction(iconAddFile, tr("Add Files"), this);
+
+    QIcon iconAddDir(":/icons/default/add_dir.png");
+    actAddDir = new QAction(iconAddDir, tr("Add Dir"), this);
+
+    QIcon iconToUnicode(":/icons/default/convert.png");
+    actToUnicode = new QAction(iconToUnicode, tr("To Unicode"), this);
+
+    QIcon iconRemove(":/icons/default/remove.png");
+    actRemove = new QAction(iconRemove, tr("Remover"), this);
+
+    QIcon iconClear(":/icons/default/clearlist.png");
+    actClear = new QAction(iconClear, tr("Clear"), this);
+
+    QIcon iconSettings(":/icons/default/settings.png");
+    actSettings = new QAction(iconSettings, tr("Settings"), this);
+
+    QIcon iconAbout(":/icons/default/info.png");
+    actAbout = new QAction(iconAbout, tr("About"), this);
+
+    QIcon iconAboutQt(":/icons/default/info.png");
+    actAboutQt = new QAction(iconAboutQt, tr("About Qt"), this);
+
+    QIcon iconExit(":/icons/default/exit.png");
+    actQuit = new QAction(iconExit, tr("Exit"), this);
 
     actToUnicode->setEnabled(false);
     actClear->setEnabled(false);

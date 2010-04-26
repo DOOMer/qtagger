@@ -208,6 +208,10 @@ p, li { white-space: pre-wrap; }
        <property name="text">
         <string>Close</string>
        </property>
+       <property name="icon">
+        <iconset resource="../qtagger.qrc">
+         <normaloff>:/icons/default/button_accept.png</normaloff>:/icons/default/button_accept.png</iconset>
+       </property>
       </widget>
      </item>
      <item>
@@ -227,6 +231,8 @@ p, li { white-space: pre-wrap; }
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../qtagger.qrc"/>
+ </resources>
  <connections/>
 </ui>
