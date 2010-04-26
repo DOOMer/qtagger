@@ -47,10 +47,9 @@ void Config::killInstance()
 
 QString Config::configFile()
 {
-    QString path;
-    path.append(QDir::homePath());
+    QString path(qgetenv("XDG_CONFIG_HOME"));
     path.append(QDir::separator());
-    path.append(".config/qtagger/qtagger.conf");
+    path.append("qtagger/qtagger.conf");
 
     return path;
 }

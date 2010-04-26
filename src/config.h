@@ -25,6 +25,7 @@
 #include <QVariant>
 #include <QDir>
 #include <QFile>
+#include <QtCore/QtGlobal>
 #include <QDebug>
 
 // default values
