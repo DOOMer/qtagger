@@ -24,6 +24,7 @@
 #include <QTextCodec>
 #include <QMap>
 #include <QDebug>
+#include <QMessageBox>
 
 #include "config.h"
 
@@ -48,6 +49,7 @@ private:
     CfgFlags::ToolbarType toolbarType; /// rype of toolbar
 
 private slots:
+    void on_butDefaults_clicked();
     void on_rbText_clicked();
     void on_rbIcon_clicked();
     void on_rbTextIcon_clicked();

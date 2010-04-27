@@ -127,3 +127,10 @@ void ConfigDialog::on_rbText_clicked()
 {
     toolbarType = CfgFlags::tbText;
 }
+
+void ConfigDialog::on_butDefaults_clicked()
+{
+    conf->defaultSettings();
+    QMessageBox::information(this, qApp->applicationName() + " - " + tr("Message"), tr("Settings will be restored to default values!"), QMessageBox::Ok );
+    accept();
+}
