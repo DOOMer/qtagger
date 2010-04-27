@@ -26,12 +26,22 @@ namespace Ui {
     class aboutdialog;
 }
 
+/**
+ * About dialog class
+ */
 class AboutDialog : public QDialog
 {
     Q_OBJECT
 
 public:
+    /**
+     * Constructor for about dialog
+     */
     explicit AboutDialog(QWidget *parent = 0);
+
+    /**
+     * Destructor for about dialog
+     */
     ~AboutDialog();
 
 protected:
@@ -41,6 +51,9 @@ private:
     Ui::aboutdialog *ui;
 
 private slots:
+    /**
+     * Close about dialog function
+     */
     void on_butClose_clicked();
 };
 

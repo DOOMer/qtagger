@@ -38,26 +38,69 @@ const QString KEY_TOOLBAR_DYSPLAY = "toolbarType";
 
 namespace CfgFlags
 {
+    /**
+     * @enum Enum for toolbar types
+     */
     enum ToolbarType
     {
-        tbTextIcon = 0,
-        tbIcon = 1,
-        tbText =2
+        tbTextIcon = 0, /// toolbottons with text & icons
+        tbIcon = 1, /// toolbottons with only icons
+        tbText = 2  /// toolbottons with only text
     };
 };
 
+/**
+ * @class Class provides storage for configuration data and works with it
+ */
 class Config
 {
 public:
+    /**
+     * Get current instance of configuration object
+     * @return Pointer on created object
+     */
     static Config* instance();
+
+    /**
+     * Destroy current Config object
+     */
     static void killInstance();
+
+    /**
+     * Get system language
+     * @return String with current system locale
+     */
     static QString getSysLang();
 
+    /**
+     * Load configuration data from conf file
+     */
     void loadSettings();
+
+    /**
+     * Save configuration data to conf file
+     */
     void saveSettings();
+
+    /**
+     * Reset configuration data from default values
+     */
     void defaultSettings();
 
+    /**
+     * Return value on configuration parameter
+     *
+     * @param String of name key
+     * @return QVariant value of configuration parameter
+     */
     QVariant value(const QString &key);
+
+    /**
+     * Set value on configuration parameter
+     *
+     * @param String of name key
+     * @param String of saved value
+     */
     void setValue(const QString& key, QVariant val);
 
 private:
@@ -65,6 +108,11 @@ private:
     Config(const Config &);
     Config& operator=(const Config& );
 
+    /**
+     * Return path to configuration file
+     *
+     * @return String path to conf file
+     */
     static QString configFile();
 
     static Config *ptrInstance;

@@ -41,11 +41,11 @@ public:
 
 protected:
     void changeEvent(QEvent *e);
-    Config *conf;
+    Config *conf; /// pointer on Config object
 
 private:
     Ui::ConfigDialog *ui;
-    CfgFlags::ToolbarType toolbarType;
+    CfgFlags::ToolbarType toolbarType; /// rype of toolbar
 
 private slots:
     void on_rbText_clicked();

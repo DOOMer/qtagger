@@ -37,14 +37,56 @@ const QString TRACK_INFO_TIME = "time";
 class TrackFileItem
 {
 public:
+    /**
+     * convert string to unicode
+     *
+     * @param Sreing for filename
+     * @param tag pointer
+     */
     TrackFileItem(const QString &file, Tag *tag);    
+
+    /**
+     * Create empty traclist item
+     */
     TrackFileItem();
+
+    /**
+     * Return current trackitem
+     *
+     * @return pointer on this trackitem object
+     */
     TrackFileItem* self();
+
+    /**
+     * Return filename of trackitem
+     *
+     * @return  String filename
+     */
     QString getFile() const;
 
+    /**
+     * Get number of trackdata items
+     *
+     * @return integer fo nymbers trackdata items
+     */
     int columnCount() const;
+
+    /**
+     * Return data value
+     *
+     * @param int num of selected colum
+     * @return Variant data
+     */
     QVariant data(int colum) const;
+
     void setData(const QString key, const QString &value);
+
+    /**
+     * Return data value (overloaded)
+     *
+     * @param Sreing key
+     * @return Variant data
+     */
     QVariant data(const QString &key) const;
 
 private:

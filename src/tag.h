@@ -50,8 +50,21 @@ public:
     Tag(const QString &file);
     virtual ~Tag();
 
+    /**
+     * Return audio properties
+     *
+     * @return Pointer to audio tag object
+     */
     TagAudio *audio;
+
+    /**
+     * Reading tag data
+     */
     virtual void readInfo();
+
+    /**
+     * Writing id3v2 tag data
+     */
     virtual bool writeInfo();
 
     void setTitle(const QString &title);
@@ -63,9 +76,25 @@ public:
     void setComment(const QString &comment);
     void setFile(const QString &file);
 
-    // convert data in tag for update track item info
+    /**
+     * convert data in tag for update track item info
+     */
     void toUtfTag();
+
+    /**
+     * convert string to unicode
+     *
+     * @param String for convert
+     * @return String converted to unicode
+     */
     QString& toUtfTagStr(QString& str);
+
+    /**
+     * convert string to taglib string
+     *
+     * @param Sreing for convert
+     * @return String converted to TagLib::String
+     */
     TagLib::String toTagLibStr(QString str);
 
     QString& title() const;
@@ -78,10 +107,10 @@ public:
     QString file() const;    
 
 private:
-    TagData *data;
-    QString filename;
+    TagData *data; /// tag data
+    QString filename; /// filename of reading|writing tag data
 
-    void Init();
+    void Init(); /// initiale tag object
 };
 
 #endif // TAG_H

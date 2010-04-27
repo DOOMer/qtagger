@@ -39,18 +39,93 @@ public:
     explicit QTagger(QObject *parent = 0);
     ~QTagger();
 
+    /**
+     * Return pointer on trackmodel object
+     *
+     * @param trackModel pounter
+     */
     TrackModel* getTrackModel();
+
+    /**
+     * Create trackmodel item
+     *
+     * @param String path to open file
+     */
     void createTrackItem(const QString &file);
+
+    /**
+     * Added some files to list
+     *
+     * @param list of added filenames
+     */
     void addFiles(QStringList &files);
+
+    /**
+     * Added dir with all contains file
+     *
+     * @param path to added dir
+     */
     void addDir(QDir &selectDir);
+
+    /**
+     * Iterate subdirs frim adding dir
+     *
+     * @param Selected dir
+     */
     void iterateDir(QDir &selectDir);
+
+    /**
+     * Remove selected files
+     *
+     * @param Modelindexes with selected items
+     */
     void removeFiles(QModelIndexList &indexez);
+
+    /**
+     * Update current item data
+     *
+     * @param Modelindex of current item
+     */
     bool updateItem(QModelIndex &index);
+
+    /**
+     * Clear list (delete all items)
+     */
     void clearList();
+
+    /**
+     * Convert to Utf selected items
+     *
+     * @param Modelindexes with selected items
+     */
     bool toUnicode(QModelIndexList &indexez);
+
+    /**
+     * Return pointer on trackmodel object
+     *
+     * @param trackModel pounter
+     */
     void setTag(Tag *tag);
+
+    /**
+     * Return current item tag
+     *
+     * @return Pointer to current item  tag
+     */
     Tag* currentTag();
+
+    /**
+     * Return config object
+     *
+     * @return Pointer to config object
+     */
     Config* config();
+
+    /**
+     * Return last added dir
+     *
+     * @return String path to last added dir
+     */
     QString& lastAddedDir();
 signals:
 

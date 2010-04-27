@@ -34,6 +34,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->treeView->setModel(app->getTrackModel());
 
     // set resizing colums
+
     ui->treeView->header()->setStretchLastSection(false);
     ui->treeView->header()->setResizeMode(0, QHeaderView::Stretch);
     ui->treeView->header()->setResizeMode(1, QHeaderView::Stretch);
