@@ -70,7 +70,7 @@ set(QTAGGER_UI
 )
 
 # Qt resource file
-#set( QTAGGER_QRC qtagger.qrc )
+set( QTAGGER_QRC qtagger.qrc )
 
   # this will run uic on .ui files:
 qt4_wrap_ui(QTAGGER_UI_H ${QTAGGER_UI} )
@@ -79,7 +79,7 @@ qt4_wrap_ui(QTAGGER_UI_H ${QTAGGER_UI} )
 qt4_wrap_cpp(QTAGGER_MOC_CPP ${QTAGGER_MOC} )
 
 # genereating resource cpp
-#qt4_add_resources( QRC_SOURCES ${QTAGGER_QRC} )
+qt4_add_resources( QRC_SOURCES ${QTAGGER_QRC} )
 
 
 # --- TODO - add docs section
@@ -94,7 +94,7 @@ link_directories(${TAGLIB_LIBRARY_DIRS})
 
 #-------------------------------------
 
-#add_executable(qtagger ${QTAGGER_SRC} ${QTAGGER_MOC_CPP} ${QTAGGER_UI_H} ${QRC_SOURCES})
-add_executable(qtagger ${QTAGGER_SRC} ${QTAGGER_MOC_CPP} ${QTAGGER_UI_H} )
+add_executable(qtagger ${QTAGGER_SRC} ${QTAGGER_MOC_CPP} ${QTAGGER_UI_H} ${QRC_SOURCES})
+#add_executable(qtagger ${QTAGGER_SRC} ${QTAGGER_MOC_CPP} ${QTAGGER_UI_H} )
 
 target_link_libraries( qtagger ${QT_LIBRARIES} ${TAGLIB_LDFLAGS} ${TAGLIB_CFLAGS} )
