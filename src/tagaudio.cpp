@@ -58,7 +58,7 @@ void TagAudio::setFile(QString &file)
 
 void TagAudio::readAuidioInfo()
 {
-    TagLib::FileRef ref(filename.toLocal8Bit());
+    TagLib::FileRef ref(TagLib::FileName(filename.toLocal8Bit()));
 
     if (ref.isNull() == false && ref.audioProperties())
     {

@@ -122,12 +122,11 @@ QString& Tag::toUtfTagStr(QString& str)
 // readi tag info from file
 void Tag::readInfo()
 {
-    TagLib::FileRef ref(filename.toLocal8Bit());
+    TagLib::MPEG::File file(TagLib::FileName(filename.toLocal8Bit()));
 
-    // if fileref is not null
-    if (ref.isNull() == false && ref.tag())
+    if (file.isValid() && file.tag())
     {
-        TagLib::Tag *fileTag = ref.tag();
+        TagLib::ID3v2::Tag *fileTag = file.ID3v2Tag(true);
 
         setTitle(QString::fromUtf8(fileTag->title().toCString(true)));
         setArtist(QString::fromUtf8(fileTag->artist().toCString(true)));
@@ -148,12 +147,9 @@ void Tag::readInfo()
 // TODO -- moved to separete sybclass
 bool Tag::writeInfo()
 {
-    TagLib::FileRef ref(filename.toLocal8Bit());
-
-    if (ref.isNull() == false && ref.tag())
+    TagLib::MPEG::File file(TagLib::FileName(filename.toLocal8Bit()));
+    if (file.isValid() && file.tag())
     {
-
-        TagLib::MPEG::File file(ref.file()->name());
         TagLib::ID3v2::Tag *fileTag = file.ID3v2Tag(true);
 
         fileTag->setTitle(toTagLibStr(title()));
@@ -164,7 +160,7 @@ bool Tag::writeInfo()
         fileTag->setYear(year());
         fileTag->setTrack(trackNum());
 
-        return file.save();
+        return file.save(TagLib::MPEG::File::ID3v2);
     }
     else
     {
