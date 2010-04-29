@@ -11,5 +11,7 @@
         <file>icons/default/remove.png</file>
         <file>icons/default/add_dir.png</file>
         <file>icons/default/settings.png</file>
+        <file>img/qtagger-logo.png</file>
+        <file>img/qtagger.png</file>
     </qresource>
 </RCC>

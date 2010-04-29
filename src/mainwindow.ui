@@ -25,6 +25,10 @@
   <property name="windowTitle">
    <string>qTagger</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="../qtagger.qrc">
+    <normaloff>:/img/qtagger.png</normaloff>:/img/qtagger.png</iconset>
+  </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QVBoxLayout" name="verticalLayout_5">
     <item>

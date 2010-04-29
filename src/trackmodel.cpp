@@ -61,7 +61,7 @@ QVariant TrackModel::headerData(int section, Qt::Orientation orientation, int ro
         }
     }
 
-    return QVariant( str);
+    return QVariant(str);
 }
 
 QVariant TrackModel::data(const QModelIndex &index, int role) const

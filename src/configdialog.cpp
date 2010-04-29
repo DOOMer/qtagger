@@ -26,6 +26,7 @@ ConfigDialog::ConfigDialog(QWidget *parent) :
 {
     ui->setupUi(this);
     setWindowTitle(qApp->applicationName() + " - " + tr("Settings"));
+//    setWindowIcon(":/");
     switch(conf->value(KEY_TOOLBAR_DYSPLAY).toInt())
     {
     case CfgFlags::tbTextIcon:
@@ -58,12 +59,43 @@ ConfigDialog::ConfigDialog(QWidget *parent) :
 
     // codecs
     QMap<QString, QTextCodec *> codecMap;
+    QRegExp iso8859RegExp("ISO[- ]8859-([0-9]+).*");
 
     foreach (int mib, QTextCodec::availableMibs())
     {
         QTextCodec *codec = QTextCodec::codecForMib(mib);
 
+        // sorting codec names
         QString sortKey = codec->name().toUpper();
+        int rank = 0;
+
+        if (sortKey.startsWith("WINDOWS") == true)
+        {
+            rank = 1;  // top level
+        }
+        else if (sortKey.startsWith("UTF-16") == true)
+        {
+            rank = 2;
+        }
+        else if (sortKey.startsWith("UTF-32") == true)
+        {
+            rank = 3;
+        }
+        else if (sortKey.startsWith("UTF-8") == true)
+        {
+            continue;
+        }
+        else if (iso8859RegExp.exactMatch(sortKey))
+        {
+            rank = 4;
+        }
+        else
+        {
+            rank = 5;
+        }
+
+        // prpend rnknums to sortkey
+        sortKey.prepend(QChar('0' + rank));
 
         codecMap.insert(sortKey, codec);
     }

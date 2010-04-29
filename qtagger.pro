@@ -34,12 +34,20 @@ HEADERS  += src/mainwindow.h \
 FORMS    += src/mainwindow.ui \
     src/aboutdialog.ui \
     src/configdialog.ui
-
-CONFIG += link_pkgconfig
-PKGCONFIG += taglib
+unix {
+    CONFIG += link_pkgconfig
+    PKGCONFIG += taglib
+}
 
 OTHER_FILES += \
-    CMakeLists.txt
+    CMakeLists.txt \
+    qtagger.rc
 
 RESOURCES += \
     qtagger.qrc
+
+win32 {
+    RC_FILE = qtagger.rc
+    INCLUDEPATH += src/common/include
+    LIBS += src/common/taglib-1.6.1-bin/lib/libtag.dll.a
+}
