@@ -354,6 +354,8 @@ void MainWindow::slotTreeSelChanged(const QItemSelection &selected, const QItemS
         actRemove->setEnabled(false);
         clearEditBoxes();
         ui->butSelect->setText(SELECT_ALL);
+        ui->butSave->setEnabled(false);
+        ui->butCancel->setEnabled(false);
     }
     else
     {
@@ -361,6 +363,8 @@ void MainWindow::slotTreeSelChanged(const QItemSelection &selected, const QItemS
         actClear->setEnabled(true);
         actRemove->setEnabled(true);
         ui->butSelect->setText(SELECT_NONE);
+        ui->butSave->setEnabled(true);
+        ui->butCancel->setEnabled(true);
     }
 }
 

@@ -26,7 +26,7 @@ ConfigDialog::ConfigDialog(QWidget *parent) :
 {
     ui->setupUi(this);
     setWindowTitle(qApp->applicationName() + " - " + tr("Settings"));
-//    setWindowIcon(":/");
+    setWindowIcon(QIcon(":/icons/default/settings.png"));
     switch(conf->value(KEY_TOOLBAR_DYSPLAY).toInt())
     {
     case CfgFlags::tbTextIcon:

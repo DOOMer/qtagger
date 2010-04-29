@@ -29,7 +29,7 @@
 #include <QDebug>
 
 // default values
-const QString DEFAULT_ENCODING = "ISO-8859-1";
+const QString DEFAULT_ENCODING = "windows-1250";
 const quint8 DEFAULT_TOOLBAR_TYPE = 0;
 
 // key constants
