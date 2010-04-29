@@ -17,7 +17,9 @@ SOURCES += src/main.cpp\
     src/trackmodel.cpp \
     src/qtagger.cpp \
     src/tagaudio.cpp \
-    src/aboutdialog.cpp
+    src/aboutdialog.cpp \
+    src/configdialog.cpp \
+    src/config.cpp
 
 HEADERS  += src/mainwindow.h \
     src/tag.h \
@@ -25,10 +27,27 @@ HEADERS  += src/mainwindow.h \
     src/trackmodel.h \
     src/qtagger.h \
     src/tagaudio.h \
-    src/aboutdialog.h
+    src/aboutdialog.h \
+    src/configdialog.h \
+    src/config.h
 
 FORMS    += src/mainwindow.ui \
-    src/aboutdialog.ui
+    src/aboutdialog.ui \
+    src/configdialog.ui
+unix {
+    CONFIG += link_pkgconfig
+    PKGCONFIG += taglib
+}
 
-CONFIG += link_pkgconfig
-PKGCONFIG += taglib
+OTHER_FILES += \
+    CMakeLists.txt \
+    qtagger.rc
+
+RESOURCES += \
+    qtagger.qrc
+
+win32 {
+    RC_FILE = qtagger.rc
+    INCLUDEPATH += src/common/include
+    LIBS += src/common/taglib-1.6.1-bin/lib/libtag.dll.a
+}

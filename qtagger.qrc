@@ -1,0 +1,17 @@
+<RCC>
+    <qresource prefix="/">
+        <file>icons/default/add_file.png</file>
+        <file>icons/default/button_accept.png</file>
+        <file>icons/default/button_cancel.png</file>
+        <file>icons/default/clearlist.png</file>
+        <file>icons/default/convert.png</file>
+        <file>icons/default/exit.png</file>
+        <file>icons/default/help.png</file>
+        <file>icons/default/info.png</file>
+        <file>icons/default/remove.png</file>
+        <file>icons/default/add_dir.png</file>
+        <file>icons/default/settings.png</file>
+        <file>img/qtagger-logo.png</file>
+        <file>img/qtagger.png</file>
+    </qresource>
+</RCC>
