@@ -258,7 +258,7 @@ void MainWindow::slotClear()
 //    int result = msg.exec();
 
 //    if (result == QMessageBox::Yes)
-//    {
+//    {    
     app->clearList();
 
     actToUnicode->setEnabled(false);
@@ -266,8 +266,8 @@ void MainWindow::slotClear()
     actRemove->setEnabled(false);
     ui->butSelect->setEnabled(false);
 
-    disconnect(ui->treeView->selectionModel(), SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)), this, SLOT(slotTreeSelChanged(const QItemSelection &, const QItemSelection &)));
-        disconnect(ui->treeView->selectionModel(), SIGNAL(currentRowChanged(QModelIndex,QModelIndex)), this, SLOT(slotRowChanged(QModelIndex,QModelIndex)));
+//    disconnect(ui->treeView->selectionModel(), SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)), this, SLOT(slotTreeSelChanged(const QItemSelection &, const QItemSelection &)));
+//        disconnect(ui->treeView->selectionModel(), SIGNAL(currentRowChanged(QModelIndex,QModelIndex)), this, SLOT(slotRowChanged(QModelIndex,QModelIndex)));
 //    }
 }
 
@@ -438,20 +438,23 @@ void MainWindow::on_treeView_customContextMenuRequested(QPoint pos)
 // loading data
 void MainWindow::loadData(int row)
 {
-    qDebug() << "row " << row;
-    app->currentTag()->setFile(app->getTrackModel()->getItem(row)->getFile());
-    ui->editTitle->setText(app->currentTag()->toUtfTagStr(app->currentTag()->title()));
-    ui->editAlbum->setText(app->currentTag()->toUtfTagStr(app->currentTag()->album()));
-    ui->editaArtist->setText(app->currentTag()->toUtfTagStr(app->currentTag()->artist()));
-    ui->editYear->setText(QString::number(app->currentTag()->year()));
-    ui->cbxGenre->setEditText(app->currentTag()->toUtfTagStr(app->currentTag()->genre()));
+    if (row != -1)
+    {
+        qDebug() << "row " << row;
+        app->currentTag()->setFile(app->getTrackModel()->getItem(row)->getFile());
+        ui->editTitle->setText(app->currentTag()->toUtfTagStr(app->currentTag()->title()));
+        ui->editAlbum->setText(app->currentTag()->toUtfTagStr(app->currentTag()->album()));
+        ui->editaArtist->setText(app->currentTag()->toUtfTagStr(app->currentTag()->artist()));
+        ui->editYear->setText(QString::number(app->currentTag()->year()));
+        ui->cbxGenre->setEditText(app->currentTag()->toUtfTagStr(app->currentTag()->genre()));
 
-    // TODO -- create genrelist & select in list
-    ui->editTrackNum->setText(QString::number(app->currentTag()->trackNum()));
-    ui->editComment->setPlainText(app->currentTag()->toUtfTagStr(app->currentTag()->comment()));
+        // TODO -- create genrelist & select in list
+        ui->editTrackNum->setText(QString::number(app->currentTag()->trackNum()));
+        ui->editComment->setPlainText(app->currentTag()->toUtfTagStr(app->currentTag()->comment()));
 
-    ui->labBitrate->setText(tr("Bitrate: ") + QString::number(app->currentTag()->audio->bitrate()) + " kbps");
-    ui->labSampleRate->setText(tr("Sample rate: ") + QString::number(app->currentTag()->audio->sampleRate()) + " Hz");
-        ui->labTime->setText(tr("Time: ") + app->currentTag()->audio->timeStr());
+        ui->labBitrate->setText(tr("Bitrate: ") + QString::number(app->currentTag()->audio->bitrate()) + " kbps");
+        ui->labSampleRate->setText(tr("Sample rate: ") + QString::number(app->currentTag()->audio->sampleRate()) + " Hz");
+            ui->labTime->setText(tr("Time: ") + app->currentTag()->audio->timeStr());
 
+    }
 }

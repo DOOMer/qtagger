@@ -106,7 +106,7 @@ bool QTagger::updateItem(QModelIndex &index)
 
 void QTagger::clearList()
 {
-    model->clear();    
+    model->clear();
 }
 
 bool QTagger::toUnicode(QModelIndexList &indexez)
