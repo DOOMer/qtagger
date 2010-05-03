@@ -9,6 +9,10 @@ QT       += core gui
 TARGET = qtagger
 TEMPLATE = app
 
+OBJECTS_DIR = build
+MOC_DIR = build
+RCC_DIR = build
+UI_DIR = build
 
 SOURCES += src/main.cpp\
         src/mainwindow.cpp \
@@ -37,6 +41,12 @@ FORMS    += src/mainwindow.ui \
 unix {
     CONFIG += link_pkgconfig
     PKGCONFIG += taglib
+
+    # select prefix
+    isEmpty( PREFIX ):PREFIX = /usr
+    else:PREFIX = $${PREFIX}
+    PREFIXSTR = '\\"$${PREFIX}\\"'
+    DEFINES += PREFIX=\"$${PREFIXSTR}\"
 }
 
 OTHER_FILES += \
