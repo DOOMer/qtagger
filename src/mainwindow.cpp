@@ -280,7 +280,33 @@ void MainWindow::slotSettings()
 
 void MainWindow::slotHelp()
 {
-    qDebug() << "show help slot";
+    // open help file
+    QString localeHelpFile;
+
+#ifdef Q_WS_X11
+//    defaultHelpFile = QString(PREFIX)+"%1share%1doc%1screengrab%1html%1en%1index.html";
+    localeHelpFile = QString(PREFIX)+"%1share%1doc%1qtagger%1html%1"+Config::getSysLang()+"%1index.html";
+    localeHelpFile = localeHelpFile.arg(QString(QDir::separator()));
+
+    if (QFile::exists(localeHelpFile) != true)
+    {
+        localeHelpFile = QString(PREFIX)+"%1share%1doc%1qtagger%1html%1en_US%1index.html";
+        localeHelpFile = localeHelpFile.arg(QString(QDir::separator()));
+    }
+#endif
+#ifdef Q_WS_WIN
+    localeHelpFile = QApplication::applicationDirPath()+QString("%1docs%1html%1")+Config::getSysLang()+QString("%1index.html");
+    localeHelpFile = localeHelpFile.arg(QString(QDir::separator()));
+
+    if (QFile::exists(localeHelpFile) != true)
+    {
+        localeHelpFile = QApplication::applicationDirPath()+"%1docs%1html%1en_US%1index.html";
+        localeHelpFile = localeHelpFile.arg(QString(QDir::separator()));
+    }
+#endif
+
+    // open find localize or eng help help
+    QDesktopServices::openUrl(QUrl::fromLocalFile(localeHelpFile));
 }
 
 void MainWindow::updateUI()

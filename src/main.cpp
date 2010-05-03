@@ -24,7 +24,7 @@ int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
     app.setApplicationName("qTagger");
-    app.setApplicationVersion("0.96");
+    app.setApplicationVersion("0.98");
 
     MainWindow w;
 

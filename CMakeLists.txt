@@ -38,7 +38,7 @@ set(CMAKE_INSTALL_PREFIX "/usr")
 
 add_definitions( -DPREFIX="${CMAKE_INSTALL_PREFIX}")
 
-message(STATUS "Indtall prefix: " ${CMAKE_INSTALL_PREFIX})
+message(STATUS "Install prefix: " ${CMAKE_INSTALL_PREFIX})
 # -------------------------------------------
 
 set(QTAGGER_SRC
@@ -80,9 +80,6 @@ qt4_wrap_cpp(QTAGGER_MOC_CPP ${QTAGGER_MOC} )
 # genereating resource cpp
 qt4_add_resources( QRC_SOURCES ${QTAGGER_QRC} )
 
-
-# --- TODO - add docs section
-
 #---------------------------
 
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
@@ -117,12 +114,6 @@ endif (UNIX)
 if(WIN32)
 target_link_libraries( qtagger ${QT_LIBRARIES} ${TAGLIB_LIBRARIES} )
 endif(WIN32)
-
-#-------------------------------------------
-# documentation files
-set(USERDOCS
-  ${CMAKE_CURRENT_SOURCE_DIR}/docs/README.txt
-)
 
 #-------------------------------------------
 #installs unix
