@@ -59,6 +59,7 @@ private:
     QAction *actSettings;
     QAction *actAbout;
     QAction *actAboutQt;
+    QAction *actHelp;
     QAction *actQuit;
 
     QMenu *menuFile;
@@ -90,6 +91,7 @@ private slots:
     void slotRemoveFiles();
     void slotClear();
     void slotSettings();
+    void slotHelp();
     void updateUI();
     void slotTreeSelChanged(const QItemSelection &selected, const QItemSelection &deselected);
 };

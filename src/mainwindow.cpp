@@ -67,6 +67,9 @@ void MainWindow::createActions()
     QIcon iconSettings(":/icons/default/settings.png");
     actSettings = new QAction(iconSettings, tr("Settings"), this);
 
+    QIcon iconHelp(":/icons/default/help.png");
+    actHelp = new QAction(iconHelp, tr("Help"), this);
+
     QIcon iconAbout(":/icons/default/info.png");
     actAbout = new QAction(iconAbout, tr("About"), this);
 
@@ -89,7 +92,7 @@ void MainWindow::createActions()
     ui->mainToolBar->addAction(actClear);
     ui->mainToolBar->addSeparator();
     ui->mainToolBar->addAction(actSettings);
-    ui->mainToolBar->addAction(actAbout);
+    ui->mainToolBar->addAction(actHelp);
 
     menuFile = new QMenu(tr("File"), this);
     menuHelp = new QMenu(tr("Help"), this);
@@ -107,6 +110,8 @@ void MainWindow::createActions()
     menuFile->addSeparator();
     menuFile->addAction(actQuit);
 
+    menuHelp->addAction(actHelp);
+    menuHelp->addSeparator();
     menuHelp->addAction(actAbout);
     menuHelp->addAction(actAboutQt);
 
@@ -135,7 +140,8 @@ void MainWindow::createActions()
     connect(actRemove, SIGNAL(triggered()), this, SLOT(slotRemoveFiles()));
     connect(actClear, SIGNAL(triggered()), this, SLOT(slotClear()));
     connect(actSettings, SIGNAL(triggered()), this, SLOT(slotSettings()));
-    connect(actToUnicode, SIGNAL(triggered()), this, SLOT(slotToUnicode()));    
+    connect(actToUnicode, SIGNAL(triggered()), this, SLOT(slotToUnicode()));
+    connect(actHelp, SIGNAL(triggered()), this, SLOT(slotHelp()));
 }
 
 void MainWindow::changeEvent(QEvent *e)
@@ -270,6 +276,11 @@ void MainWindow::slotSettings()
     }
 
     delete configdialog;
+}
+
+void MainWindow::slotHelp()
+{
+    qDebug() << "show help slot";
 }
 
 void MainWindow::updateUI()
