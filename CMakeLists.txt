@@ -117,3 +117,18 @@ endif (UNIX)
 if(WIN32)
 target_link_libraries( qtagger ${QT_LIBRARIES} ${TAGLIB_LIBRARIES} )
 endif(WIN32)
+
+#-------------------------------------------
+# documentation files
+set(USERDOCS
+  ${CMAKE_CURRENT_SOURCE_DIR}/docs/README.txt
+)
+
+#-------------------------------------------
+#installs unix
+if(UNIX AND NOT APPLE)
+    INSTALL(TARGETS qtagger RUNTIME DESTINATION bin)
+    INSTALL(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/docs/" DESTINATION share/doc/qtagger)
+  INSTALL(FILES "${CMAKE_CURRENT_SOURCE_DIR}/img/qtagger.png" DESTINATION share/pixmaps)
+
+endif(UNIX AND NOT APPLE)
