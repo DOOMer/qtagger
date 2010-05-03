@@ -1,0 +1,195 @@
+<! DOCTYPE HTML PUBLIC "- / / W3C / / DTD HTML 4.01 / / EN">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title> qTagger - a simple editor id3v2-tags </title>
+</head>
+<body lang="ru-RU" dir="LTR">
+<h1> qTagger - a simple editor id3-tags </h1>
+  <p>
+   <b> qTagger </b> is a simple application designed
+      editing id3-tag mp3-files. In addition to the application includes a function
+      automated conversion of tags from different national character sets to UTF-8.
+  </p>
+  <p>
+   <b> qTagger </b> operates on GNU/Linux and Microsoft Windows (XP/Vista/Seven)
+  </p>
+  <p>
+    To work with the id3-tag library is used TagLib,
+    for GUI - Qt Development Framevork.
+  </p>
+<hr>
+<h2> program interface </h2>
+  <h3> Main Window </h3>
+  <p>
+     The main window <b> qTagger </b> consists of 3 main parts:
+  </p>
+  <ul>
+    <li>Main menu </li>
+    <li>Toolbar </li>
+    <li>List of opened files </li>
+    <li>Field tag editing area</li>
+  </ul>
+<hr>
+  <p>
+     <b> Main Menu </b> - allows you to perform basic operations,
+      in the program. Most of the items also duplicated
+      on the toolbar and the context menu of files.
+  </p>
+  <p>
+     Description items <b> File </b>.
+  </p>
+  <ul>
+    <li> <b> Add directory </b> - add a file directory
+(Also including all subdirectories) </li>
+    <li><b> Add file </b> - add one or more files </li>
+    <li><b> Convert </b> - convert tags vvybrannyh files
+in UTF-8</li>
+    <li><b>Delete</b> - Delete selected files from the list </li>
+    <li><b>Clear</b> - clear whole list </li>
+    <li><b>Settings</b> - the program settings window </li>
+    <li><b>Exit</b> - exit the program </li>
+</ul>
+  <p>
+     Description items the <b>Info</b>.
+  </p>
+<ul>
+    <li><b>Help</b> - display the help system (in HTML-format)</li>
+    <li><b>About</b> - display information about qTagger </li>
+    <li><b>About Qt</b> - display information about Qt Development Framevork </li>
+  </ul>
+  <p>
+     <b>Toolbar</b> - allows you to perform basic operations,
+      in the program. Most of the buttons is also duplicated
+      in the main menu and context menu files.
+  </p>
+  <p>
+     Description of the toolbar buttons.
+  </p>
+  <ul>
+    <li><b>Add directory</b> - add a file directory
+(Also including all subdirectories) </li>
+    <li><b>Add file</b> - add one or more files </li>
+    <li><b>Convert</b> - convert tags selected files
+in UTF-8 </li>
+    <li><b>Delete</b> - Delete selected files from the list </li>
+    <li><b>Clear</b> - oschistka whole list </li>
+    <li><b>Settings</b> - the program settings window </li>
+    <li><b>Help</b> - display the help system (in HTML-format) program </li>
+  </ul>
+  <p>
+     <b>List of opened files</b> - is designed to display a list of files
+      and operations on them. Allows you to select one or more files. 
+      
+  </p>
+  <p>
+    Clicking on the list of files, right-click context menu appears, where
+    Duplicated main menu and toolbar buttons,
+    Related to operations with files.
+  </p>
+  <p>
+     <b>Field tag editing</b> - consists of several input fields
+      to fill key id3-tags. Here are two buttons:.
+  </p>
+  <ul>
+    <li><b>Save</b> - save your changes to the file </li>
+    <li><b>cancel</b> - reset all unsaved changes in the selected file </li>
+  </ul>
+<hr>
+<a name='usage'> </ a>
+<h2> Using </h2>
+<h3> Main oepratsii </h3>
+  <p>
+      <b>Adding files</b>
+  </p>
+  <p>
+      You can add files in several ways:
+  </p>
+<ul>
+    <li>through the main menu - <b>File</b>-><b>Add File</b>.</li>
+    <li>clicking <b>Add file</b> on the toolbar. </li>
+    <li>Use of <b>Add file</b> in the shortcut menu, the list of files. </li>
+  </ul>
+  <p>
+      Files are always added to the end of the list.
+  </p>
+  <p>
+      <b>Adding files</b>
+  </p>
+  <p>
+      File directory can be added in several ways:
+  </p>
+<ul>
+    <li>through the main menu - <b>File</b>-><b>Add directory</b>. </li>
+    <li>clicking <b>Add directory</b> on the toolbar. </li>
+    <li>Use of <b>Add directory</b> in the shortcut menu, the list of files. </li>
+  </ul>
+  <p>
+      If the selected directory are nested subdirectories
+    their content (mp3-files) will also be added to the program.
+    Files are always added to the end of the list.
+  </p>
+  <p>
+      <b>Convert tags in UTF-8</b>
+  </p>
+  <p>
+      To convert the tags to the files from the local 8-bit encoding to utf-8 should
+      select the files you need from the list and then click <b> convert </b>
+      on the toolbar. This can be done by selecting 
+      the main menu <b>File</b>-><b>To Unicode</b>, or the same name from the context menu list of files.
+  </p>
+  <p>
+      To select multiple files, press and hold <b> Ctrl </b>
+      and using the mouse, choose the files you want.
+  </p>
+  <p>
+      <b> Delete selected files from the list </b>
+  </p>
+  <p>
+      Delete selected files can be produced by several sposoboami:
+  </p>
+<ul>
+    <li> through the main menu - <b> File </b> -> <b> Delete </b>. </li>
+    <li> clicking <b> Delete </b> on the toolbar. </li>
+    <li> Use of <b> Delete </b> in the shortcut menu, the list of files. </li>
+  </ul>
+  <p>
+      To select multiple files, press and hold <b> Ctrl </b>
+      and using the mouse, choose the files you want.
+  </p>
+  <p>
+      To remove <b> all </b> files from the list, click <b> Clear </b> on
+      toolbar. Or select the appropriate item in the main (or context) menu.
+  </p>
+<hr/>
+  <h3> Setting </h3>
+  <p>
+    Preset window can be accessed by clicking <b> Nastryoka </b> on the toolbar
+    or selecting an item from the main menu.
+  </p>
+  <p>
+     The program provides only 2 custom parameter -
+<b> Encoding </b> and <b> Toolbar </b>.
+  The first one selects the necessary initial encoding to convert
+    non-UTF tags. The second - allows you to customize the look of the buttons on the toolbar -
+    show them the text, icons or together with the text.
+  </p>
+<hr/>
+<h2> License and Copyright </h2>
+  <p>
+   Program <b> qTagger </b> is free under the terms
+<a href=http://www.gnu.org/licenses/old-licenses/gpl-2.0.html target=_blank> GNU General Public License version 2 </ a>
+  </p>
+<hr/>
+<h2> Version History </h2>
+  <p>
+     Version 1.0.
+  </p>
+  <ul>
+    <li> first full-featured operating release </li>
+  </ul>
+<hr>
+  <p>
+     <br />
+  </p>
+</ Body> 
