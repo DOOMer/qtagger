@@ -39,6 +39,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->treeView->header()->setResizeMode(0, QHeaderView::Stretch);
     ui->treeView->header()->setResizeMode(1, QHeaderView::Stretch);
     ui->treeView->header()->setResizeMode(2, QHeaderView::Stretch);
+
+    ui->treeView->installEventFilter(this);
 }
 
 MainWindow::~MainWindow()
@@ -185,6 +187,7 @@ void MainWindow::slotAddFiles()
     ui->butSelect->setEnabled(true);
 
     connect(ui->treeView->selectionModel(), SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)), this, SLOT(slotTreeSelChanged(const QItemSelection &, const QItemSelection &)));
+    connect(ui->treeView->selectionModel(), SIGNAL(currentRowChanged(QModelIndex,QModelIndex)), this, SLOT(slotRowChanged(QModelIndex,QModelIndex)));
 }
 
 void MainWindow::slotAddDir()
@@ -197,6 +200,7 @@ void MainWindow::slotAddDir()
     ui->butSelect->setEnabled(true);
 
     connect(ui->treeView->selectionModel(), SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)), this, SLOT(slotTreeSelChanged(const QItemSelection &, const QItemSelection &)));
+    connect(ui->treeView->selectionModel(), SIGNAL(currentRowChanged(QModelIndex,QModelIndex)), this, SLOT(slotRowChanged(QModelIndex,QModelIndex)));
 }
 
 
@@ -237,6 +241,7 @@ void MainWindow::slotRemoveFiles()
         ui->butSelect->setEnabled(false);
 
         disconnect(ui->treeView->selectionModel(), SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)), this, SLOT(slotTreeSelChanged(const QItemSelection &, const QItemSelection &)));
+        disconnect(ui->treeView->selectionModel(), SIGNAL(currentRowChanged(QModelIndex,QModelIndex)), this, SLOT(slotRowChanged(QModelIndex,QModelIndex)));
     }
 //    }
 }
@@ -262,6 +267,7 @@ void MainWindow::slotClear()
     ui->butSelect->setEnabled(false);
 
     disconnect(ui->treeView->selectionModel(), SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)), this, SLOT(slotTreeSelChanged(const QItemSelection &, const QItemSelection &)));
+        disconnect(ui->treeView->selectionModel(), SIGNAL(currentRowChanged(QModelIndex,QModelIndex)), this, SLOT(slotRowChanged(QModelIndex,QModelIndex)));
 //    }
 }
 
@@ -326,24 +332,6 @@ void MainWindow::updateUI()
     }
 }
 
-void MainWindow::on_treeView_clicked(QModelIndex index)
-{
-    app->currentTag()->setFile(app->getTrackModel()->getItem(index.row())->getFile());
-    ui->editTitle->setText(app->currentTag()->toUtfTagStr(app->currentTag()->title()));
-    ui->editAlbum->setText(app->currentTag()->toUtfTagStr(app->currentTag()->album()));
-    ui->editaArtist->setText(app->currentTag()->toUtfTagStr(app->currentTag()->artist()));
-    ui->editYear->setText(QString::number(app->currentTag()->year()));
-    ui->cbxGenre->setEditText(app->currentTag()->toUtfTagStr(app->currentTag()->genre()));
-
-    // TODO -- create genrelist & select in list
-    ui->editTrackNum->setText(QString::number(app->currentTag()->trackNum()));
-    ui->editComment->setPlainText(app->currentTag()->toUtfTagStr(app->currentTag()->comment()));
-
-    ui->labBitrate->setText(tr("Bitrate: ") + QString::number(app->currentTag()->audio->bitrate()) + " kbps");
-    ui->labSampleRate->setText(tr("Sample rate: ") + QString::number(app->currentTag()->audio->sampleRate()) + " Hz");
-        ui->labTime->setText(tr("Time: ") + app->currentTag()->audio->timeStr());
-}
-
 void MainWindow::on_butCancel_clicked()
 {
     ui->editTitle->setText(app->currentTag()->title());
@@ -382,17 +370,24 @@ void MainWindow::on_butSave_clicked()
     }
 }
 
+
+
+void MainWindow::slotRowChanged(QModelIndex current, QModelIndex prev)
+{
+//    load data();
+    loadData(current.row());
+}
+
 void MainWindow::slotTreeSelChanged(const QItemSelection &selected, const QItemSelection &deselected)
 {
     if (selected.isEmpty() == true)
     {
         actToUnicode->setEnabled(false);
-
         actRemove->setEnabled(false);
-        clearEditBoxes();
         ui->butSelect->setText(SELECT_ALL);
         ui->butSave->setEnabled(false);
         ui->butCancel->setEnabled(false);
+        clearEditBoxes();
     }
     else
     {
@@ -438,4 +433,25 @@ void MainWindow::on_treeView_customContextMenuRequested(QPoint pos)
 {
     QWidget* w = static_cast<QWidget*>(QObject::sender());
     menuTrackContext->exec(w->mapToGlobal(pos));
+}
+
+// loading data
+void MainWindow::loadData(int row)
+{
+    qDebug() << "row " << row;
+    app->currentTag()->setFile(app->getTrackModel()->getItem(row)->getFile());
+    ui->editTitle->setText(app->currentTag()->toUtfTagStr(app->currentTag()->title()));
+    ui->editAlbum->setText(app->currentTag()->toUtfTagStr(app->currentTag()->album()));
+    ui->editaArtist->setText(app->currentTag()->toUtfTagStr(app->currentTag()->artist()));
+    ui->editYear->setText(QString::number(app->currentTag()->year()));
+    ui->cbxGenre->setEditText(app->currentTag()->toUtfTagStr(app->currentTag()->genre()));
+
+    // TODO -- create genrelist & select in list
+    ui->editTrackNum->setText(QString::number(app->currentTag()->trackNum()));
+    ui->editComment->setPlainText(app->currentTag()->toUtfTagStr(app->currentTag()->comment()));
+
+    ui->labBitrate->setText(tr("Bitrate: ") + QString::number(app->currentTag()->audio->bitrate()) + " kbps");
+    ui->labSampleRate->setText(tr("Sample rate: ") + QString::number(app->currentTag()->audio->sampleRate()) + " Hz");
+        ui->labTime->setText(tr("Time: ") + app->currentTag()->audio->timeStr());
+
 }

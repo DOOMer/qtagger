@@ -29,6 +29,7 @@
 #include <QIcon>
 #include <QUrl>
 #include <QDesktopServices>
+#include <QModelIndex>
 
 #include "qtagger.h"
 #include "tag.h"
@@ -74,16 +75,16 @@ private:
 
     void createActions();
     void clearEditBoxes();
+    void loadData(int);
 
     const QString SELECT_ALL;
     const QString SELECT_NONE;
 
-private slots:
+private slots:    
     void on_treeView_customContextMenuRequested(QPoint pos);
     void on_butSelect_clicked();
     void on_butSave_clicked();
-    void on_butCancel_clicked();
-    void on_treeView_clicked(QModelIndex index);
+    void on_butCancel_clicked();    
     void slotExit();
     void slotAbout();
     void slotAboutQt();
@@ -95,6 +96,7 @@ private slots:
     void slotSettings();
     void slotHelp();
     void updateUI();
+    void slotRowChanged(QModelIndex, QModelIndex);
     void slotTreeSelChanged(const QItemSelection &selected, const QItemSelection &deselected);
 };
 
