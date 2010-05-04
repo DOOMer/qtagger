@@ -104,6 +104,55 @@ link_directories(${TAGLIB_LIBRARY_DIRS})
 
 #-------------------------------------
 
+IF (UNIX)
+ADD_CUSTOM_TARGET (distclean @echo cleaning for source distribution)
+
+ADD_CUSTOM_COMMAND(
+    COMMENT "distribution clean"
+    COMMAND make
+    ARGS -C ${CMAKE_CURRENT_BINARY_DIR} clean
+    COMMAND find
+    ARGS ${CMAKE_CURRENT_BINARY_DIR} -name "CMakeCache.txt" | xargs rm -rf
+    COMMAND find
+    ARGS ${CMAKE_CURRENT_BINARY_DIR} -name "CMakeFiles" | xargs rm -rf
+    COMMAND find
+    ARGS ${CMAKE_CURRENT_BINARY_DIR} -name "Makefile" | xargs rm -rf
+    COMMAND find
+    ARGS ${CMAKE_CURRENT_BINARY_DIR} -name \"*.cmake\" | xargs rm -rf
+    COMMAND find
+    ARGS ${CMAKE_CURRENT_SOURCE_DIR}/localize -name "*.qm" | xargs rm -rf
+    COMMAND rm
+    ARGS -rf ${CMAKE_CURRENT_BINARY_DIR}/install_manifest.txt
+    TARGET  distclean
+)
+ENDIF(UNIX)
+
+#-------------------------------------
+
+# find lrelease binary
+IF(NOT QT_LRELEASE_EXECUTABLE)
+FIND_PROGRAM(QT_LRELEASE_EXECUTABLE
+    NAMES lrelease
+    PATHS ${QT_BINARY_DIR}
+    NO_DEFAULT_PATH
+)
+ENDIF(NOT QT_LRELEASE_EXECUTABLE)
+
+# debian hack
+IF(EXISTS ${QT_BINARY_DIR}/lrelease-qt4)
+SET(QT_LRELEASE_EXECUTABLE ${QT_BINARY_DIR}/lrelease-qt4)
+ENDIF(EXISTS ${QT_BINARY_DIR}/lrelease-qt4)
+
+IF(QT_LRELEASE_EXECUTABLE)
+MESSAGE(STATUS "Found lrelease executable: " ${QT_LRELEASE_EXECUTABLE})
+MESSAGE(STATUS "Generating localize ...")
+execute_process(COMMAND find ${CMAKE_CURRENT_SOURCE_DIR}/localize -name *.ts COMMAND xargs ${QT_LRELEASE_EXECUTABLE} -silent)
+ELSE(QT_LRELEASE_EXECUTABLE)
+MESSAGE(FATAL_ERROR "Could NOT find lrelease executable")
+ENDIF(QT_LRELEASE_EXECUTABLE)
+
+#-------------------------------------
+
 add_executable(qtagger ${QTAGGER_SRC} ${QTAGGER_MOC_CPP} ${QTAGGER_UI_H} ${QRC_SOURCES})
 #add_executable(qtagger ${QTAGGER_SRC} ${QTAGGER_MOC_CPP} ${QTAGGER_UI_H} )
 
@@ -120,6 +169,8 @@ endif(WIN32)
 if(UNIX AND NOT APPLE)
     INSTALL(TARGETS qtagger RUNTIME DESTINATION bin)
     INSTALL(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/docs/" DESTINATION share/doc/qtagger)
-  INSTALL(FILES "${CMAKE_CURRENT_SOURCE_DIR}/img/qtagger.png" DESTINATION share/pixmaps)
+    INSTALL(FILES "${CMAKE_CURRENT_SOURCE_DIR}/img/qtagger.png" DESTINATION share/pixmaps)
+    INSTALL(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/localize/" DESTINATION share/qtagger/localize FILES_MATCHING PATTERN "*.qm")
+
 
 endif(UNIX AND NOT APPLE)
