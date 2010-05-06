@@ -20,12 +20,11 @@
 #ifndef QTAGGER_H
 #define QTAGGER_H
 
-#include <QObject>
-#include <QList>
-#include <QStringList>
-#include <QDir>
-#include <QDirIterator>
-#include <QDebug>
+#include <QtCore/QObject>
+#include <QtCore/QList>
+#include <QtCore/QStringList>
+#include <QtCore/QDir>
+#include <QtCore/QDirIterator>
 
 #include "config.h"
 #include "tag.h"

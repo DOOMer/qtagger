@@ -20,14 +20,14 @@
 #ifndef TRACKMODEL_H
 #define TRACKMODEL_H
 
-#include <QAbstractItemModel>
-#include <QAbstractListModel>
-#include <QModelIndex>
-#include <QModelIndexList>
-#include <QList>
-#include <QColor>
-#include <QApplication>
-#include <QPalette>
+#include <QtCore/QAbstractItemModel>
+#include <QtCore/QAbstractListModel>
+#include <QtCore/QModelIndex>
+#include <QtCore/QModelIndexList>
+#include <QtCore/QList>
+#include <QtGui/QColor>
+#include <QtGui/QApplication>
+#include <QtGui/QPalette>
 
 #include "trackfileitem.h"
 

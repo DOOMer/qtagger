@@ -20,9 +20,8 @@
 #ifndef TAG_H
 #define TAG_H
 
-#include <QString>
-#include <QTextCodec>
-#include <QDebug>
+#include <QtCore/QString>
+#include <QtCore/QTextCodec>
 
 #include <taglib/fileref.h>
 #include <taglib/id3v2tag.h>

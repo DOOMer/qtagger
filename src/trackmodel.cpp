@@ -139,7 +139,6 @@ bool TrackModel::updateRow(const QModelIndex &index)
     int row = index.row();
     if (row == -1)
     {
-        qDebug() << "row is " << row;
         return false;
     }
     else

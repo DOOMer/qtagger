@@ -103,7 +103,6 @@ void Config::setValue(const QString &key, QVariant val)
 
 QVariant Config::value(const QString &key)
 {
-//    QVariant ref = &confData[key];
     return confData[key];
 }
 

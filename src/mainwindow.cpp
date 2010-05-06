@@ -440,7 +440,6 @@ void MainWindow::loadData(int row)
 {
     if (row != -1)
     {
-        qDebug() << "row " << row;
         app->currentTag()->setFile(app->getTrackModel()->getItem(row)->getFile());
         ui->editTitle->setText(app->currentTag()->toUtfTagStr(app->currentTag()->title()));
         ui->editAlbum->setText(app->currentTag()->toUtfTagStr(app->currentTag()->album()));

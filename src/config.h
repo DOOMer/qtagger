@@ -20,13 +20,13 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
-#include <QSettings>
-#include <QHash>
-#include <QVariant>
-#include <QDir>
-#include <QFile>
+#include <QtCore/QSettings>
+#include <QtCore/QHash>
+#include <QtCore/QVariant>
+#include <QtCore/QDir>
+#include <QtCore/QFile>
 #include <QtCore/QtGlobal>
-#include <QDebug>
+#include <QtCore/QLocale>
 
 // default values
 const QString DEFAULT_ENCODING = "windows-1250";

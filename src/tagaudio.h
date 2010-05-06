@@ -20,12 +20,10 @@
 #ifndef TAGAUDIO_H
 #define TAGAUDIO_H
 
-#include <QString>
-#include <QDebug>
+#include <QtCore/QString>
 
 #include <taglib/fileref.h>
 #include <taglib/tag.h>
-//#include "tag.h";
 
 struct TagDataAudio
 {

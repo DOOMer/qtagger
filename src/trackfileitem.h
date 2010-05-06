@@ -20,11 +20,10 @@
 #ifndef TRACKFILEITEM_H
 #define TRACKFILEITEM_H
 
-#include <QString>
-#include <QDebug>
-#include <QHash>
-#include <QMap>
-#include <QVariant>
+#include <QtCore/QString>
+#include <QtCore/QHash>
+#include <QtCore/QMap>
+#include <QtCore/QVariant>
 
 #include "tag.h"
 

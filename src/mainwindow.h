@@ -20,16 +20,16 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include <QMainWindow>
-#include <QDebug>
-#include <QFileDialog>
-#include <QAction>
-#include <QMenu>
-#include <QItemSelection>
-#include <QIcon>
-#include <QUrl>
-#include <QDesktopServices>
-#include <QModelIndex>
+#include <QtGui/QMainWindow>
+#include <QtCore/QDebug>
+#include <QtGui/QFileDialog>
+#include <QtGui/QAction>
+#include <QtGui/QMenu>
+#include <QtGui/QItemSelection>
+#include <QtGui/QIcon>
+#include <QtCore/QUrl>
+#include <QtGui/QDesktopServices>
+#include <QtCore/QModelIndex>
 
 #include "qtagger.h"
 #include "tag.h"

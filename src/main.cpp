@@ -18,20 +18,37 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 #include <QtGui/QApplication>
+#include <QtCore/QTranslator>
+
 #include "mainwindow.h"
 
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
     app.setApplicationName("qTagger");
-    app.setApplicationVersion("0.98");
 
+    QTranslator localize;
+
+#ifdef Q_WS_X11
+    QString localizeFile = PREFIX;
+    localizeFile.append("/share/qtagger/localize/qtagger_"+Config::getSysLang()+".qm");
+    localize.load(localizeFile);
+
+#endif
+#ifdef Q_WS_WIN // QLocale::system().name()
+    localize.load(app.applicationDirPath()+"/localize/qtagger_"+Config::getSysLang()+".qm");
+#endif
+
+    app.installTranslator(&localize);
+
+#ifdef VERSION
+    app.setApplicationVersion(VERSION);
+#else
+    app.setApplicationVersion("dev");
+#endif
     MainWindow w;
 
-//#if defined(Q_WS_S60) || defined(Q_WS_MAEMO_5)
-//    w.showMaximized();
-//#else
     w.show();
-//#endif
+
     return app.exec();
 }
