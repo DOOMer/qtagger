@@ -29,6 +29,9 @@
    <iconset resource="../qtagger.qrc">
     <normaloff>:/img/qtagger.png</normaloff>:/img/qtagger.png</iconset>
   </property>
+  <property name="toolTip">
+   <string notr="true"/>
+  </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QVBoxLayout" name="verticalLayout_5">
     <item>

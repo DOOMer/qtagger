@@ -179,7 +179,7 @@ void MainWindow::slotAboutQt()
 
 void MainWindow::slotAddFiles()
 {
-    QStringList fileList = QFileDialog::getOpenFileNames(this, tr("Open File"), app->lastAddedDir());
+    QStringList fileList = QFileDialog::getOpenFileNames(this, tr("Add File"), app->lastAddedDir());
 
     app->addFiles(fileList);
 
@@ -266,8 +266,8 @@ void MainWindow::slotClear()
     actRemove->setEnabled(false);
     ui->butSelect->setEnabled(false);
 
-//    disconnect(ui->treeView->selectionModel(), SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)), this, SLOT(slotTreeSelChanged(const QItemSelection &, const QItemSelection &)));
-//        disconnect(ui->treeView->selectionModel(), SIGNAL(currentRowChanged(QModelIndex,QModelIndex)), this, SLOT(slotRowChanged(QModelIndex,QModelIndex)));
+    disconnect(ui->treeView->selectionModel(), SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)), this, SLOT(slotTreeSelChanged(const QItemSelection &, const QItemSelection &)));
+        disconnect(ui->treeView->selectionModel(), SIGNAL(currentRowChanged(QModelIndex,QModelIndex)), this, SLOT(slotRowChanged(QModelIndex,QModelIndex)));
 //    }
 }
 
@@ -290,7 +290,6 @@ void MainWindow::slotHelp()
     QString localeHelpFile;
 
 #ifdef Q_WS_X11
-//    defaultHelpFile = QString(PREFIX)+"%1share%1doc%1screengrab%1html%1en%1index.html";
     localeHelpFile = QString(PREFIX)+"%1share%1doc%1qtagger%1html%1"+Config::getSysLang()+"%1index.html";
     localeHelpFile = localeHelpFile.arg(QString(QDir::separator()));
 
@@ -308,6 +307,18 @@ void MainWindow::slotHelp()
     {
         localeHelpFile = QApplication::applicationDirPath()+"%1docs%1html%1en_US%1index.html";
         localeHelpFile = localeHelpFile.arg(QString(QDir::separator()));
+
+        // display error when help file not found
+        if (QFile::exists(localeHelpFile) != true)
+        {
+                QMessageBox msg(QMessageBox::Warning,
+                                tr("Error") + QString(" - qTagger"), "" ,
+                                QMessageBox::Ok);
+                msg.setText(tr("Help file not found"));
+                msg.setInformativeText(tr("Help file missing in: ") + localeHelpFile);
+                msg.exec();
+            return ;
+        }
     }
 #endif
 
