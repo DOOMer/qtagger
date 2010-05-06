@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Icon=qtagger
+Exec=qtagger
+Comment=qTagger - a simple id3-tag editor
+Name=qTagger
+Categories=Audio;Qt;AudioVideo;
+Comment[ru_RU.UTF-8]=qTagger - простой редактор id3-тегов
+
