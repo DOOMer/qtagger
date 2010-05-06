@@ -30,7 +30,7 @@
 
 // default values
 const QString DEFAULT_ENCODING = "windows-1250";
-const quint8 DEFAULT_TOOLBAR_TYPE = 0;
+const quint8 DEFAULT_TOOLBAR_TYPE = 1;
 
 // key constants
 const QString KEY_SOURCE_ENCODING = "soueceEncodeing";
