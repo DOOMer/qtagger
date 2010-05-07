@@ -15,7 +15,7 @@ endif (UNIX)
 # ------ version defination --------------------------
 
 
-set(QTAGGER_VERSION "0.99.0")
+set(QTAGGER_VERSION "1.0")
 add_definitions( -DVERSION="${QTAGGER_VERSION}")
 
 # ------ build type ------------------------
@@ -29,7 +29,7 @@ if(${CMAKE_BUILD_TYPE} MATCHES "Release")
   add_definitions(-DNDEBUG)
   add_definitions(-DQT_NO_DEBUG_OUTPUT)
 endif(${CMAKE_BUILD_TYPE} MATCHES "Release")
-
+message(STATUS "Build type: " ${CMAKE_BUILD_TYPE})
 # ------ install prefix --------------------------
 
 set(CMAKE_INSTALL_PREFIX "/usr")
