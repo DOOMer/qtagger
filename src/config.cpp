@@ -47,10 +47,18 @@ void Config::killInstance()
 
 QString Config::configFile()
 {
-    QString path(qgetenv("XDG_CONFIG_HOME"));
-    path.append(QDir::separator());
-    path.append("qtagger/qtagger.conf");
+    QString path;
 
+#ifdef Q_OS_WIN32
+    path = QDesktopServices::storageLocation(QDesktopServices::DataLocation) + QDir::toNativeSeparators(QDir::separator()) + "qtagger.ini";
+#endif
+#ifdef Q_OS_UNIX
+    path = qgetenv("XDG_CONFIG_HOME");
+    path.append(QDir::separator());
+    path.append(qApp->applicationName().toLower());
+    path.append(QDir::separator());
+    path.append("qtagger.conf");
+#endif
     return path;
 }
 

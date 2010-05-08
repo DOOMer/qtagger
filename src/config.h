@@ -27,6 +27,8 @@
 #include <QtCore/QFile>
 #include <QtCore/QtGlobal>
 #include <QtCore/QLocale>
+#include <QtGui/QDesktopServices>
+#include <QtCore/QCoreApplication>
 
 // default values
 const QString DEFAULT_ENCODING = "windows-1250";

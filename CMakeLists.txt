@@ -26,10 +26,13 @@ if (NOT CMAKE_BUILD_TYPE)
       FORCE)
 endif(NOT CMAKE_BUILD_TYPE)
 if(${CMAKE_BUILD_TYPE} MATCHES "Release")
-  add_definitions(-DNDEBUG)
-  add_definitions(-DQT_NO_DEBUG_OUTPUT)
+    add_definitions(-DNDEBUG)
+    add_definitions(-DQT_NO_DEBUG_OUTPUT)
+    add_definitions("-O2")
 endif(${CMAKE_BUILD_TYPE} MATCHES "Release")
 message(STATUS "Build type: " ${CMAKE_BUILD_TYPE})
+    # dislpay all compile warnings
+    add_definitions("-Wall")
 # ------ install prefix --------------------------
 
 set(CMAKE_INSTALL_PREFIX "/usr")
