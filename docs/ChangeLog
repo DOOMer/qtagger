@@ -1,0 +1,7 @@
+qTagger change log
+
+v1.0.1
+ * [win32] fixed incorrect creating (in c:\qtagger folder) config file
+
+v1.0
+ * firstpublic release

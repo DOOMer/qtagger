@@ -15,7 +15,7 @@ endif (UNIX)
 # ------ version defination --------------------------
 
 
-set(QTAGGER_VERSION "1.0")
+set(QTAGGER_VERSION "1.0.1")
 add_definitions( -DVERSION="${QTAGGER_VERSION}")
 
 # ------ build type ------------------------
