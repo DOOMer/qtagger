@@ -77,7 +77,7 @@ TagLib::String Tag::toTagLibStr(QString str)
     {        
         QString sourceEncoding = Config::instance()->value(KEY_SOURCE_ENCODING).toString();
 
-        QTextCodec *codec = QTextCodec::codecForName(sourceEncoding.toAscii());
+        QTextCodec *codec = QTextCodec::codecForName(sourceEncoding.toLatin1());
         QByteArray arr;
         arr.append(str);
         str = codec->toUnicode(arr);
@@ -107,7 +107,7 @@ QString& Tag::toUtfTagStr(QString& str)
     if (taglibStr.isLatin1() == true)
     {
         QString sourceEncoding = Config::instance()->value(KEY_SOURCE_ENCODING).toString();
-        QTextCodec *codec = QTextCodec::codecForName(sourceEncoding.toAscii());
+        QTextCodec *codec = QTextCodec::codecForName(sourceEncoding.toLatin1());
         QByteArray arr;
         arr.append(str);
         str = codec->toUnicode(arr);

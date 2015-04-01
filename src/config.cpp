@@ -71,7 +71,7 @@ void Config::loadSettings()
     }
     else
     {
-        QSettings loader(Config::configFile().toAscii(), QSettings::IniFormat);
+        QSettings loader(Config::configFile().toLatin1(), QSettings::IniFormat);
 
         loader.beginGroup("Main");
         confData.insert(KEY_SOURCE_ENCODING, loader.value(KEY_SOURCE_ENCODING, DEFAULT_ENCODING).toString());
@@ -84,7 +84,7 @@ void Config::loadSettings()
 
 void Config::saveSettings()
 {
-    QSettings saver(Config::configFile().toAscii(), QSettings::IniFormat);
+    QSettings saver(Config::configFile().toLatin1(), QSettings::IniFormat);
 
     // write settings
     saver.beginGroup("Main");
