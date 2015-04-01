@@ -1,5 +1,5 @@
 # qTagger Cmake build script
-cmake_minimum_required( VERSION 2.6 )
+cmake_minimum_required( VERSION 2.8.11 )
 
 # set project's name
 project( QTAGGER )
@@ -7,8 +7,7 @@ project( QTAGGER )
 message(STATUS "System: " ${CMAKE_HOST_SYSTEM_NAME} " " ${CMAKE_HOST_SYSTEM_VERSION})
 message(STATUS "Processor: " ${CMAKE_HOST_SYSTEM_PROCESSOR})
 
-find_package( Qt4 REQUIRED )
-include( "${QT_USE_FILE}" )
+find_package(Qt5Widgets 5.2.0 REQUIRED)
 if (UNIX)
 include(FindPkgConfig)
 endif (UNIX)
@@ -41,6 +40,11 @@ add_definitions( -DPREFIX="${CMAKE_INSTALL_PREFIX}")
 
 message(STATUS "Install prefix: " ${CMAKE_INSTALL_PREFIX})
 
+# long live cmake + qt :)
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTOUIC ON)
+set(CMAKE_AUTORC ON)
+
 # ------ files --------------------------
 
 set(QTAGGER_SRC
@@ -56,31 +60,12 @@ set(QTAGGER_SRC
     src/trackmodel.cpp
 )
 
-set(QTAGGER_MOC
-    src/aboutdialog.h
-    src/configdialog.h
-    src/qtagger.h
-    src/mainwindow.h
-    src/trackmodel.h
-)
-
-set(QTAGGER_UI
-    src/aboutdialog.ui
-    src/configdialog.ui
-    src/mainwindow.ui
-)
 
 # Qt resource file
 set( QTAGGER_QRC qtagger.qrc )
 
-  # this will run uic on .ui files:
-qt4_wrap_ui(QTAGGER_UI_H ${QTAGGER_UI} )
-
-# genereate moc headers
-qt4_wrap_cpp(QTAGGER_MOC_CPP ${QTAGGER_MOC} )
-
 # genereating resource cpp
-qt4_add_resources( QRC_SOURCES ${QTAGGER_QRC} )
+qt5_add_resources( QRC_SOURCES ${QTAGGER_QRC} )
 
 #------- includes -------------
 
@@ -178,14 +163,14 @@ endif(WIN32)
 add_executable(qtagger ${QTAGGER_SRC} ${QTAGGER_MOC_CPP} ${QTAGGER_UI_H} ${QRC_SOURCES})
 
 if (UNIX)
-target_link_libraries( qtagger ${QT_LIBRARIES} ${TAGLIB_LDFLAGS} ${TAGLIB_CFLAGS} )
+target_link_libraries( qtagger Qt5::Widgets ${TAGLIB_LDFLAGS} ${TAGLIB_CFLAGS} )
 endif (UNIX)
 
 if(WIN32)
     if(NOT MSVC)
 
         set(CMAKE_EXE_LINKER_FLAGS ${CMAKE_EXE_LINKER_FLAGS} "-mwindows")
-        target_link_libraries( qtagger ${QT_LIBRARIES} ${TAGLIB_LIBRARIES} )
+        target_link_libraries( qtagger Qt5::Widgets ${TAGLIB_LIBRARIES} )
 
     endif(NOT MSVC)
 endif(WIN32)
