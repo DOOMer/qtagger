@@ -20,10 +20,10 @@
 #ifndef CONFIGDIALOG_H
 #define CONFIGDIALOG_H
 
-#include <QtGui/QDialog>
+#include <QtWidgets/QDialog>
 #include <QtCore/QTextCodec>
 #include <QtCore/QMap>
-#include <QtGui/QMessageBox>
+#include <QtWidgets/QMessageBox>
 
 #include "config.h"
 

@@ -20,12 +20,12 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include <QtGui/QMainWindow>
+#include <QtWidgets/QMainWindow>
 #include <QtCore/QDebug>
-#include <QtGui/QFileDialog>
-#include <QtGui/QAction>
-#include <QtGui/QMenu>
-#include <QtGui/QItemSelection>
+#include <QtWidgets/QFileDialog>
+#include <QtWidgets/QAction>
+#include <QtWidgets/QMenu>
+#include <QtCore/QItemSelection>
 #include <QtGui/QIcon>
 #include <QtCore/QUrl>
 #include <QtGui/QDesktopServices>

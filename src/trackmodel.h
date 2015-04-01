@@ -26,7 +26,7 @@
 #include <QtCore/QModelIndexList>
 #include <QtCore/QList>
 #include <QtGui/QColor>
-#include <QtGui/QApplication>
+#include <QtWidgets/QApplication>
 #include <QtGui/QPalette>
 
 #include "trackfileitem.h"
