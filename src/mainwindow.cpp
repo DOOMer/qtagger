@@ -36,9 +36,9 @@ MainWindow::MainWindow(QWidget *parent) :
     // set resizing colums
 
     ui->treeView->header()->setStretchLastSection(false);
-    ui->treeView->header()->setResizeMode(0, QHeaderView::Stretch);
-    ui->treeView->header()->setResizeMode(1, QHeaderView::Stretch);
-    ui->treeView->header()->setResizeMode(2, QHeaderView::Stretch);
+    ui->treeView->header()->setSectionResizeMode(0, QHeaderView::Stretch);
+    ui->treeView->header()->setSectionResizeMode(1, QHeaderView::Stretch);
+    ui->treeView->header()->setSectionResizeMode(2, QHeaderView::Stretch);
 
     ui->treeView->installEventFilter(this);
 }
